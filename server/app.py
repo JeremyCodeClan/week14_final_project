@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-import config, csv
+import csv
 import os
 from dotenv import load_dotenv
 from binance.client import Client
