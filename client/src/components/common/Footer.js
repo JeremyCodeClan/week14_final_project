@@ -6,15 +6,12 @@ const FooterBlock = styled(Responsive)`
     margin-top: 3rem;
 `;
 
-const ContentBlock = styled(Responsive)`
+const ContentBlock = styled.article`
     /* space indicate purpose */
     border: 1px dashed red;
     background: var(--lightest-teal);
 
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    height: 6rem;
 
     .foot_placeholder {
         font-size: var(--ft-lg-heading);
