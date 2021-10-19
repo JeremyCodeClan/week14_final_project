@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ResponsiveBlock = styled.div`
-    width: 1376px;
+    width: 1024px;
     margin: 0 auto;
-
     @media (max-width: 1376px) {
         width: 1024px;
     }

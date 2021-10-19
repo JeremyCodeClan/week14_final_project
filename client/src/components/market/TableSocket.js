@@ -1,60 +1,51 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { createChart, CrosshairMode } from 'lightweight-charts';
+import React, { useEffect } from 'react';
 
-const Chart = () => {
+const TableSocket = ({ socketTicker, initialTicker }) => {
 
-        
     useEffect(() => {
-        const options = {method: 'GET', headers: {Accept: 'application/json'}};
 
-        fetch('https://api.exchange.coinbase.com/products/BTC-USD/ticker', options)
-          .then(response => response.json())
-          .then(response => console.log(response))
-          .catch(err => console.error(err));
-
-
+        // ticker socket setting
         const socketCoin = new WebSocket("wss://ws-feed.pro.coinbase.com");
-        socketCoin.onopen = (e) => {
-            console.log("socket Opend!");
+        socketCoin.onopen = () => {
             socketCoin.send(JSON.stringify({
                 "type": "subscribe",
                 "channels": [
                     {
                         "name": "ticker",
-                        "product_ids": ["BTC-USD"]
+                        "product_ids": ["BTC-USD", "ETH-USD"]
                     }
-                ]}))
+                ]
+            }))
         };
+        // connect socket to redux state
         socketCoin.onmessage = (e) => {
-            console.log(e.data);
+            const messageObj = JSON.parse(e.data);
+            console.log(messageObj);
+            const refinedData = {
+                name: messageObj.product_id,
+                currentPrice: parseInt(messageObj.price),
+                openPrice: parseInt(messageObj.open_24h),
+                dailyVolume: parseInt(messageObj.volume_24h)
+            }
+            if (refinedData.name === "BTC-USD") { socketTicker({ key: 'bts_usd', value: refinedData }) }
+            if (refinedData.name === "ETH-USD") { socketTicker({ key: 'eth_usd', value: refinedData }) }
         }
 
-        // socketCoin.onmessage = (e) => {
-        //     const messageObj = JSON.parse(e.data);
-        //     console.log(messageObj);
-            // kline chart
-            // const chartData = messageObj.k;
-            // const refinedChartData = {
-            //     time: chartData.t / 1000,
-            //     open: chartData.o,
-            //     high: chartData.h,
-            //     low: chartData.l,
-            //     close: chartData.c
-            // }
-        // }
-    })
+        // disconnect socket & initialize state
+        return () => {
+            socketCoin.close();
+            initialTicker();
+        }
+        // {"type":"ticker","sequence":30317640122,"product_id":"BTC-USD","price":"63978.09","open_24h":"61423.1","volume_24h":"16285.30005051","low_24h":"61127.81","high_24h":"64049.99","volume_30d":"444672.62064311","best_bid":"63973.77","best_ask":"63979.30","side":"buy","time":"2021-10-19T19:52:27.044104Z","trade_id":223589438,"last_size":"0.00904148"}
+        // {"type":"ticker","sequence":21829534572,"product_id":"ETH-USD","price":"3816.12","open_24h":"3746.24","volume_24h":"153392.89017322","low_24h":"3700","high_24h":"3861.64","volume_30d":"5730061.12576934","best_bid":"3816.12","best_ask":"3816.13","side":"sell","time":"2021-10-19T19:52:27.315022Z","trade_id":168265885,"last_size":"0.21621896"}
+    }, [])
   
-
-
     return (
-        <>
-            <div>
-            </div>
-        </>
+        <></>
     )
 };
 
-export default Chart;
+export default TableSocket;
 
 
 
@@ -62,7 +53,7 @@ export default Chart;
 
 
 
-
+// import { createChart, CrosshairMode } from 'lightweight-charts';
 
 // const chartRef = useRef();
 
