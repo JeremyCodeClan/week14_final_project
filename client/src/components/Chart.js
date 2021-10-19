@@ -1,112 +1,161 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createChart, CrosshairMode } from 'lightweight-charts';
 
-
 const Chart = () => {
 
-    const chartRef = useRef();
-
-    const [chartData, setChartData] = useState(null);
-    const [chart, setChart] = useState(null);
-
-    const [height, setHeight] = useState(300);
-
-    const onChangeHeight = (e) => {
-        setHeight(parseInt(e.target.value));
-    }
-
-    // chart settings
-    useEffect(() => {
-        if (chart !== null) {
-            chart.resize(600, height);
-        }
-    }, [height, chart])
-
-    useEffect(() => {
-        fetch('http://localhost:5000/history')
-        .then((r) => r.json())
-        .then((response) => {
-            setChartData(response);
-        })
-    }, [])
-
-    // generate chart
-    useEffect(() => {
-        if (chartData !== null) {
-        const chart = createChart(chartRef.current.id, {
-            width: 600,
-            height: 300,
-            layout: {
-                backgroundColor: '#ffffff',
-                textColor: 'rgba(0, 0, 0, 0.9)',
-            },
-            grid: {
-                vertLines: {
-                    color: 'rgba(197, 203, 206, 0.5)',
-                },
-                horzLines: {
-                    color: 'rgba(197, 203, 206, 0.5)',
-                },
-            },
-            crosshair: {
-                mode: CrosshairMode.Normal,
-            },
-            rightPriceScale: {
-                borderColor: 'rgba(197, 203, 206, 0.8)',
-            },
-            timeScale: {
-                borderColor: 'rgba(197, 203, 206, 0.8)',
-            },
-        });
-        setChart(chart);
-
-        const candleSeries = chart.addCandlestickSeries({
-            upColor: 'rgba(255, 144, 0, 1)',
-            downColor: '#ff1010',
-            borderDownColor: 'rgba(0, 0, 0, 1)',
-            borderUpColor: 'rgba(0, 0, 0, 1)',
-            wickDownColor: 'rgba(255, 144, 0, 1)',
-            wickUpColor: 'rgba(255, 144, 0, 1)',
-        });
-
-        candleSeries.setData(chartData);
         
-        const socketCoin = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@kline_1m");
-        socketCoin.onmessage = (e) => {
-            const messageObj = JSON.parse(e.data);
+    useEffect(() => {
+        const options = {method: 'GET', headers: {Accept: 'application/json'}};
 
-            // kline chart
-            const chartData = messageObj.k;
-            const refinedChartData = {
-                time: chartData.t / 1000,
-                open: chartData.o,
-                high: chartData.h,
-                low: chartData.l,
-                close: chartData.c
-            }
-            candleSeries.update(refinedChartData);
+        fetch('https://api.exchange.coinbase.com/products/BTC-USD/ticker', options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(err => console.error(err));
+
+
+        const socketCoin = new WebSocket("wss://ws-feed.pro.coinbase.com");
+        socketCoin.onopen = (e) => {
+            console.log("socket Opend!");
+            socketCoin.send(JSON.stringify({
+                "type": "subscribe",
+                "channels": [
+                    {
+                        "name": "ticker",
+                        "product_ids": ["BTC-USD"]
+                    }
+                ]}))
+        };
+        socketCoin.onmessage = (e) => {
+            console.log(e.data);
         }
 
-        socketCoin.onclose = () => {
-            setTimeout(() => {
-                setChartData(null);
-            }, 1000);
-        };
-    }
-    }, [chartData])
+        // socketCoin.onmessage = (e) => {
+        //     const messageObj = JSON.parse(e.data);
+        //     console.log(messageObj);
+            // kline chart
+            // const chartData = messageObj.k;
+            // const refinedChartData = {
+            //     time: chartData.t / 1000,
+            //     open: chartData.o,
+            //     high: chartData.h,
+            //     low: chartData.l,
+            //     close: chartData.c
+            // }
+        // }
+    })
+  
+
 
     return (
         <>
-            <div id='chart' ref={chartRef}></div>
             <div>
-                <label name="height">Height</label>
-                <input name="height" type="number" onChange={onChangeHeight} />
             </div>
         </>
     )
 };
 
 export default Chart;
+
+
+
+
+
+
+
+
+
+// const chartRef = useRef();
+
+// const [chartData, setChartData] = useState(null);
+// const [chart, setChart] = useState(null);
+
+// const [height, setHeight] = useState(300);
+
+// const onChangeHeight = (e) => {
+//     setHeight(parseInt(e.target.value));
+// }
+
+// // chart settings
+// useEffect(() => {
+//     if (chart !== null) {
+//         chart.resize(600, height);
+//     }
+// }, [height, chart])
+
+// useEffect(() => {
+//     fetch('http://localhost:5000/history')
+//     .then((r) => r.json())
+//     .then((response) => {
+//         setChartData(response);
+//     })
+// }, [])
+
+// // generate chart
+// useEffect(() => {
+//     if (chartData !== null) {
+//     const chart = createChart(chartRef.current.id, {
+//         width: 600,
+//         height: 300,
+//         layout: {
+//             backgroundColor: '#ffffff',
+//             textColor: 'rgba(0, 0, 0, 0.9)',
+//         },
+//         grid: {
+//             vertLines: {
+//                 color: 'rgba(197, 203, 206, 0.5)',
+//             },
+//             horzLines: {
+//                 color: 'rgba(197, 203, 206, 0.5)',
+//             },
+//         },
+//         crosshair: {
+//             mode: CrosshairMode.Normal,
+//         },
+//         rightPriceScale: {
+//             borderColor: 'rgba(197, 203, 206, 0.8)',
+//         },
+//         timeScale: {
+//             borderColor: 'rgba(197, 203, 206, 0.8)',
+//         },
+//     });
+//     setChart(chart);
+
+//     const candleSeries = chart.addCandlestickSeries({
+//         upColor: 'rgba(255, 144, 0, 1)',
+//         downColor: '#ff1010',
+//         borderDownColor: 'rgba(0, 0, 0, 1)',
+//         borderUpColor: 'rgba(0, 0, 0, 1)',
+//         wickDownColor: 'rgba(255, 144, 0, 1)',
+//         wickUpColor: 'rgba(255, 144, 0, 1)',
+//     });
+
+//     candleSeries.setData(chartData);
+    
+//     const socketCoin = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@kline_1m");
+//     socketCoin.onmessage = (e) => {
+//         const messageObj = JSON.parse(e.data);
+
+//         // kline chart
+//         const chartData = messageObj.k;
+//         const refinedChartData = {
+//             time: chartData.t / 1000,
+//             open: chartData.o,
+//             high: chartData.h,
+//             low: chartData.l,
+//             close: chartData.c
+//         }
+//         candleSeries.update(refinedChartData);
+//     }
+
+//     socketCoin.onclose = () => {
+//         setTimeout(() => {
+//             setChartData(null);
+//         }, 1000);
+//     };
+// }
+// }, [chartData])
+
+
 
 
 
