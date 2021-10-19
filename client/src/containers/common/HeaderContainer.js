@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import Header from 'components/common/Header'
 
 const HeaderContainer = () => {
@@ -8,4 +9,4 @@ const HeaderContainer = () => {
     )
 }
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);

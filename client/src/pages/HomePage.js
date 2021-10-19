@@ -1,12 +1,11 @@
 import React from 'react';
 import Layout from 'components/common/Layout'
-import Chart from 'components/Chart';
+import HomeContainer from 'containers/home/HomeContainer'
 
 const HomePage = () => {
     return (
         <Layout>
-            <h1>Home Page</h1>
-            <Chart />
+            <HomeContainer />
         </Layout>
     )
 }

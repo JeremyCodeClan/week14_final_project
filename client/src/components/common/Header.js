@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Responsive from 'components/common/Responsive';
 
 const HeaderBlock = styled.div`
@@ -18,14 +19,25 @@ const NavBlock = styled(Responsive)`
 `;
 
 const LogoText = styled.div`
+    /* space indicate purpose */
+    border: 1px dashed red;
+    background: var(--lightest-teal);
+
+
     font-size: var(--ft-heading);
-    font-weight: bold;
     color: var(--lightest-navy);
+    font-weight: bold;
 `;
 
 const NavItemBlock = styled.nav``;
 const NavItems = styled.ul`
+    /* space indicate purpose */
+    border: 1px dashed red;
+    background: var(--lightest-teal);
+
+    padding: 0;
     display: flex;
+    color: var(--lightest-navy);
     .nav-item {
         margin-left: 2rem;
         font-size: var(--ft-lg)
@@ -37,14 +49,14 @@ const Header = () => {
     return (
         <HeaderBlock>
             <NavBlock>
-                <LogoText>CryptoApp</LogoText>
+                <LogoText><Link to='/'>CryptoApp</Link></LogoText>
                 <NavItemBlock>
                 <NavItems>
-                        <li className="nav-item">Market</li>
-                        <li className="nav-item">My Asset</li>
-                        <li className="nav-item">My Page</li>
-                        <li className="nav-item">Sign-in</li>
-                    </NavItems>
+                    <li className="nav-item"><Link to='/market'>Market</Link></li>
+                    <li className="nav-item"><Link to='/asset'>My Asset</Link></li>
+                    <li className="nav-item"><Link to='/personal'>My Page</Link></li>
+                    <li className="nav-item"><Link to='/'>Sign-in</Link></li>
+                </NavItems>
                 </NavItemBlock>
             </NavBlock>
         </HeaderBlock>
