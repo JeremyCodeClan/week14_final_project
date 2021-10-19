@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import HeaderContainer from 'containers/common/HeaderContainer';
 
 const ContentBlock = styled.div`
-    background-color: white;
+    background-color: var(--brightest-white);
     padding-top: 4.5rem;
 `;
 
