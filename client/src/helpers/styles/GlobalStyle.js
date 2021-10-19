@@ -103,6 +103,7 @@ const GlobalStyle = createGlobalStyle`
 
 	ul, ol {
 		margin: 0 auto;
+        list-style: none;
 	}
 
 	div {
