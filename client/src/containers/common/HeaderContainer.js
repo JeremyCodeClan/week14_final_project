@@ -4,9 +4,7 @@ import Header from 'components/common/Header'
 const HeaderContainer = () => {
 
     return (
-        <>
-            <Header />
-        </>
+        <Header />
     )
 }
 

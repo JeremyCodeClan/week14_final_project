@@ -18,16 +18,17 @@ const NavBlock = styled(Responsive)`
 `;
 
 const LogoText = styled.div`
-    font-size: var(--ft-xxl);
+    font-size: var(--ft-heading);
     font-weight: bold;
     color: var(--lightest-navy);
 `;
 
 const NavItemBlock = styled.nav``;
-const NavItemItems = styled.ul`
+const NavItems = styled.ul`
     display: flex;
     .nav-item {
         margin-left: 2rem;
+        font-size: var(--ft-lg)
     }
 `;
 
@@ -38,11 +39,12 @@ const Header = () => {
             <NavBlock>
                 <LogoText>CryptoApp</LogoText>
                 <NavItemBlock>
-                    <NavItemItems>
+                <NavItems>
                         <li className="nav-item">Market</li>
-                        <li className="nav-item">Asset</li>
-                        <li className="nav-item">Personal</li>
-                    </NavItemItems>
+                        <li className="nav-item">My Asset</li>
+                        <li className="nav-item">My Page</li>
+                        <li className="nav-item">Sign-in</li>
+                    </NavItems>
                 </NavItemBlock>
             </NavBlock>
         </HeaderBlock>
