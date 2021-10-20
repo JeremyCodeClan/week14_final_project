@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import HeaderContainer from 'containers/common/HeaderContainer';
 import FooterContainer from 'containers/common/FooterContainer';
+import { withRouter, useLocation } from 'react-router-dom';
 
 const ContentBlock = styled.div`
     background-color: var(--brightest-white);
@@ -9,15 +10,18 @@ const ContentBlock = styled.div`
 `;
 
 const Layout = ({ children }) => {
+    const location = useLocation();
+
     return (
         <>
             <HeaderContainer />
                 <ContentBlock>
                     {children}
                 </ContentBlock>
-            <FooterContainer />
+            {location.pathname === '/' ? (<FooterContainer />) : (<></>)}
+            
         </>
     )
 };
 
-export default Layout;
+export default withRouter(Layout);

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 
-const TableSocket = ({ socketTicker, initialTicker }) => {
+const TickerSocket = ({ socketTicker, initialTicker }) => {
 
     useEffect(() => {
-
         // ticker socket setting
         const socketCoin = new WebSocket("wss://ws-feed.pro.coinbase.com");
         socketCoin.onopen = () => {
@@ -20,7 +19,6 @@ const TableSocket = ({ socketTicker, initialTicker }) => {
         // connect socket to redux state
         socketCoin.onmessage = (e) => {
             const messageObj = JSON.parse(e.data);
-            console.log(messageObj);
             const refinedData = {
                 name: messageObj.product_id,
                 currentPrice: parseInt(messageObj.price),
@@ -45,7 +43,7 @@ const TableSocket = ({ socketTicker, initialTicker }) => {
     )
 };
 
-export default TableSocket;
+export default TickerSocket;
 
 
 

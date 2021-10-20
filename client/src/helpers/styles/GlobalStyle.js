@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
     --dark-teal: #14cc8f;
     --darkest-teal: #12a171;
     --teal-tint: rgba(100, 250, 200, 0.1);
+	--lightest-plum: #ffe8ff;
+    --lighter-plum: #ffd3ff;
 	--light-plum: #ffafff;
     --plum: #f564fa;
     --dark-plum: #bd14cc;

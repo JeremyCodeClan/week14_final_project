@@ -1,11 +1,14 @@
 import React from 'react';
 import Layout from 'components/common/Layout'
-import TableContainer from 'containers/market/TableContainer'
+import TickerContainer from 'containers/market/TickerContainer'
+import InvestedContainer from 'containers/market/InvestedContainer'
+import TableContainer from 'containers/market/TableContainer';
 
 const MarketPage = () => {
     return (
         <Layout>
-            <h1>Market Page</h1>
+            <TickerContainer />
+            <InvestedContainer />
             <TableContainer />
         </Layout>
     )
