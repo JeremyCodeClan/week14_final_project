@@ -1,6 +1,5 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import csv
 import os
 from dotenv import load_dotenv
 from binance.client import Client
@@ -17,7 +16,9 @@ def index():
 
 @app.route('/history')
 def history():
-    candleSticks = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_1MINUTE, "12 hours ago UTC")
+    coin_type = request.args['type']
+
+    candleSticks = client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1MINUTE, "12 hours ago UTC")
     processed_candleSticks = []
     for data in candleSticks:
         candleStick = {
