@@ -8,7 +8,7 @@ const TickerContainer = () => {
     const dispatch = useDispatch();
 
     const socketTicker = useCallback((payload) => dispatch(changeTickerField(payload)), [dispatch]);
-    const initialTicker = useCallback((payload) => dispatch(initializeTicker()), [dispatch]); 
+    const initialTicker = useCallback(() => dispatch(initializeTicker()), [dispatch]); 
 
     return (
         <>
