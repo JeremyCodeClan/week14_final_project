@@ -23,7 +23,6 @@ const LogoText = styled.div`
     border: 1px dashed red;
     background: var(--lightest-teal);
 
-
     font-size: var(--ft-heading);
     color: var(--lightest-navy);
     font-weight: bold;
@@ -54,7 +53,6 @@ const Header = () => {
                 <NavItems>
                     <li className="nav-item"><Link to='/market'>Market</Link></li>
                     <li className="nav-item"><Link to='/asset'>My Asset</Link></li>
-                    <li className="nav-item"><Link to='/personal'>My Page</Link></li>
                     <li className="nav-item"><Link to='/'>Sign-in</Link></li>
                 </NavItems>
                 </NavItemBlock>

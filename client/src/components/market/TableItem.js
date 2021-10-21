@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const TableItemWrapper = styled.section`
+const TableItemLink = styled(Link)`
     /* space indicate purpose */
     border: 1px dashed red;
     background: var(--steel);
@@ -11,21 +12,31 @@ const TableItemWrapper = styled.section`
     display: flex;
     justify-content: space-evenly;
 
-
     .testText {
         color: white;
     }
 `;
 
 const TableItem = ({ coin }) => {
+
+    const dailyP = ((coin.currentPrice / coin.openPrice) - 1) * 100;
+    const refinedDailyP = Math.round(dailyP * 100) / 100
     
     return (
-        <TableItemWrapper>
-            <div className="testText">{coin.name}</div>
-            <div className="testText">{coin.currentPrice}</div>
-            <div className="testText">daily %</div>
-            <div className="testText">trading_v</div>
-        </TableItemWrapper>
+        // <Link to='/'>
+        <TableItemLink to={`/chart/@${coin.name}`}>
+            {coin !== null ? 
+            <>
+                <div className="testText">{coin.name}</div>
+                <div className="testText">{coin.currentPrice}</div>
+                <div className="testText">{refinedDailyP} %</div>
+                <div className="testText">{coin.dailyVolume}</div>
+            </>
+            :
+            <></>
+            }
+        </TableItemLink>
+        // </Link>
     )
 }
 
