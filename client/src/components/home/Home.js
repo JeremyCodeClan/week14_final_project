@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Responsive from 'components/common/Responsive';
 
 const HomeBlock = styled(Responsive)`
-    margin-top: 4rem;
+    margin-top: 2rem;
 `;
 
 const JumbotronBlock = styled.article`

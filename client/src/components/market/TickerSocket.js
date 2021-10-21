@@ -10,8 +10,11 @@ const TickerSocket = ({ socketTicker, initialTicker }) => {
                 "type": "subscribe",
                 "channels": [
                     {
+                        // 1.BTC, 2.ETH, 3.BNB, 4.ADA, 5.XRP, 6.SOL, 7.DOT, 8.DOGE, 9.UNI 10.LUNA
+                        // 11.LTC, 12.AVAX, 13.LINK, 14.BCH, 15.SHIB, 16.ALGO, 17.MATIC, 18.XLM, 19.ATOM, 20.ICP(Internet Computer)
                         "name": "ticker",
-                        "product_ids": ["BTC-USD", "ETH-USD"]
+                        "product_ids": ["BTC-USDT", "ETH-USDT", "SOL-USDT", "DOT-USDT", "DOGE-USDT"]
+                        // ["BNB-USDT", "ADA-USDT", "XRP-USDT", "UNI-USDT", "LUNA-USDT"]
                     }
                 ]
             }))
@@ -21,12 +24,21 @@ const TickerSocket = ({ socketTicker, initialTicker }) => {
             const messageObj = JSON.parse(e.data);
             const refinedData = {
                 name: messageObj.product_id,
-                currentPrice: parseInt(messageObj.price),
-                openPrice: parseInt(messageObj.open_24h),
-                dailyVolume: parseInt(messageObj.volume_24h)
+                currentPrice: parseFloat(messageObj.price),
+                openPrice: parseFloat(messageObj.open_24h),
+                dailyVolume: parseFloat(messageObj.volume_24h)
             }
-            if (refinedData.name === "BTC-USD") { socketTicker({ key: 'bts_usd', value: refinedData }) }
-            if (refinedData.name === "ETH-USD") { socketTicker({ key: 'eth_usd', value: refinedData }) }
+            if (refinedData.name === "BTC-USDT") { socketTicker({ key: 'bts_usdt', value: refinedData }) }
+            if (refinedData.name === "ETH-USDT") { socketTicker({ key: 'eth_usdt', value: refinedData }) }
+            if (refinedData.name === "SOL-USDT") { socketTicker({ key: 'sol_usdt', value: refinedData }) }
+            if (refinedData.name === "DOT-USDT") { socketTicker({ key: 'dot_usdt', value: refinedData }) }
+            if (refinedData.name === "DOGE-USDT") { socketTicker({ key: 'doge_usdt', value: refinedData }) }
+            // commented ones doesn't match product_id
+            // if (refinedData.name === "BNB-USDT") { socketTicker({ key: 'bnb_usdt', value: refinedData }) }
+            // if (refinedData.name === "ADA-USDT") { socketTicker({ key: 'ada_usdt', value: refinedData }) }
+            // if (refinedData.name === "XRP-USDT") { socketTicker({ key: 'xrp_usdt', value: refinedData }) }
+            // if (refinedData.name === "UNI-USDT") { socketTicker({ key: 'uni_usdt', value: refinedData }) }
+            // if (refinedData.name === "LUNA-USDT") { socketTicker({ key: 'luna_usdt', value: refinedData }) }
         }
 
         // disconnect socket & initialize state
@@ -34,8 +46,13 @@ const TickerSocket = ({ socketTicker, initialTicker }) => {
             socketCoin.close();
             initialTicker();
         }
-        // {"type":"ticker","sequence":30317640122,"product_id":"BTC-USD","price":"63978.09","open_24h":"61423.1","volume_24h":"16285.30005051","low_24h":"61127.81","high_24h":"64049.99","volume_30d":"444672.62064311","best_bid":"63973.77","best_ask":"63979.30","side":"buy","time":"2021-10-19T19:52:27.044104Z","trade_id":223589438,"last_size":"0.00904148"}
-        // {"type":"ticker","sequence":21829534572,"product_id":"ETH-USD","price":"3816.12","open_24h":"3746.24","volume_24h":"153392.89017322","low_24h":"3700","high_24h":"3861.64","volume_30d":"5730061.12576934","best_bid":"3816.12","best_ask":"3816.13","side":"sell","time":"2021-10-19T19:52:27.315022Z","trade_id":168265885,"last_size":"0.21621896"}
+
+    // {"type":"ticker","sequence":30317640122,"product_id":"BTC-USD","price":"63978.09","open_24h":"61423.1","volume_24h":"16285.30005051","low_24h":"61127.81","high_24h":"64049.99","volume_30d":"444672.62064311","best_bid":"63973.77","best_ask":"63979.30","side":"buy","time":"2021-10-19T19:52:27.044104Z","trade_id":223589438,"last_size":"0.00904148"}
+    // {"type":"ticker","sequence":21829534572,"product_id":"ETH-USD","price":"3816.12","open_24h":"3746.24","volume_24h":"153392.89017322","low_24h":"3700","high_24h":"3861.64","volume_30d":"5730061.12576934","best_bid":"3816.12","best_ask":"3816.13","side":"sell","time":"2021-10-19T19:52:27.315022Z","trade_id":168265885,"last_size":"0.21621896"}
+
+    // 1.BTC, 2.ETH, 3.BNB, 4.ADA, 5.XRP, 6.SOL, 7.DOT, 8.DOGE, 9.UNI 10.LUNA
+    // 11.LTC, 12.AVAX, 13.LINK, 14.BCH, 15.SHIB, 16.ALGO, 17.MATIC, 18.XLM, 19.ATOM, 20.ICP(Internet Computer)
+
     }, [])
   
     return (

@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Reponsive from 'components/common/Responsive';
 import TableItem from 'components/market/TableItem';
+import { withRouter } from 'react-router-dom';
 
 const TableListBlock = styled(Reponsive)`
-    margin-top: 3rem;
+    margin-top: 2rem;
 `;
 
 const TableListWrapper = styled.article`
@@ -15,24 +16,22 @@ const TableListWrapper = styled.article`
     padding: 0 1rem;
 `;
 
-const TableList = ({ bts_usd, eth_usd }) => {
-    
-    const testingArr = [...Array(5).keys()];
-    const btcTableNode = testingArr.map((val, index) => {
-        return (<TableItem key={index} coin={bts_usd} />)
-    })
-    const ethTableNode = testingArr.map((val, index) => {
-        return (<TableItem key={index} coin={eth_usd} />)
+const TableList = ({ bts_usdt, eth_usdt, sol_usdt, dot_usdt, doge_usdt }) => {
+
+    const coinArr = [bts_usdt, eth_usdt, sol_usdt, dot_usdt, doge_usdt];
+
+    // testing
+    const coinTableNode = coinArr.map((val, index) => {
+        return (<TableItem key={index} coin={val} />)
     })
 
     return (
         <TableListBlock>
             <TableListWrapper>
-                {btcTableNode}
-                {ethTableNode}
+                {coinTableNode}
             </TableListWrapper>
         </TableListBlock>
     )
 }
 
-export default TableList;
+export default withRouter(TableList);
