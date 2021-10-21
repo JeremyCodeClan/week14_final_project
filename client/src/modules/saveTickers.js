@@ -10,8 +10,18 @@ export const changeTickerField = createAction(CHANGE_TICKER_FIELD, ({ key, value
 }));
 
 const initialState = {
-    bts_usd: null,
-    eth_usd: null,
+    bts_usdt: null,
+    eth_usdt: null,
+    // bnb_usdt: null,
+    // ada_usdt: null,
+    // xrp_usdt: null,
+    sol_usdt: null,
+    dot_usdt: null,
+    doge_usdt: null,
+    // uni_usdt: null,
+    // luna_usdt: null,
+    // ["BNB-USDT", "ADA-USDT", "XRP-USDT", "UNI-USDT", "LUNA-USDT"]
+
 };
 
 const saveTickers = handleActions(
