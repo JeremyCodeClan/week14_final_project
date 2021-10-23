@@ -16,13 +16,11 @@ const TableListWrapper = styled.article`
     padding: 0 1rem;
 `;
 
-const TableList = ({ bts_usdt, eth_usdt, sol_usdt, dot_usdt, doge_usdt }) => {
-
-    const coinArr = [bts_usdt, eth_usdt, sol_usdt, dot_usdt, doge_usdt];
+const TableList = (props) => {
 
     // testing
-    const coinTableNode = coinArr.map((val, index) => {
-        return (<TableItem key={index} coin={val} />)
+    const coinTableNode = props.coinArr.map((val, index) => {
+        if (val !== null) { return <TableItem key={index} coin={val} /> }
     })
 
     return (
