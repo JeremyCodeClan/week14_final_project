@@ -3,14 +3,14 @@ import 'firebase/auth';
 import 'firebase/database'
 
 const config = {
-    apiKey: "AIzaSyAt5KSBhVvqdqABGXaLlZZMyj7jTE4xTIU",
-    authDomain: "mycryptocurrency-df595.firebaseapp.com",
-    databaseURL: "https://mycryptocurrency-df595-default-rtdb.firebaseio.com",
-    projectId: "mycryptocurrency-df595",
-    storageBucket: "mycryptocurrency-df595.appspot.com",
-    messagingSenderId: "485902861148",
-    appId: "1:485902861148:web:8afadb61b17b978d767799",
-    measurementId: "G-3MHPYHK55F"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 class Firebase {

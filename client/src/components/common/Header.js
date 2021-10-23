@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from 'components/common/Responsive';
-import authService from 'helpers/firebaseServices/authService';
+import firebase from 'firebase';
 
 
 const HeaderBlock = styled.div`
@@ -48,10 +48,10 @@ const NavItems = styled.ul`
 
 const Header = () => {
 
-    const signinFnc = () => authService.signin();
-    const signoutFnc = async () => authService.signout();
+    const signinFnc = () => firebase.signin();
+    const signoutFnc = async () => firebase.signout();
 
-    console.log(authService.getAccessToken());
+    console.log(firebase.getAccessToken());
 
     return (
         <HeaderBlock>
