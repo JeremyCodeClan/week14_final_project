@@ -22,8 +22,8 @@ const Chart = ({ coinQuery }) => {
 
     useEffect(() => {
         coinSerivce.getChartHistory(coinQuery)
-            .then((data) => {
-                setChartData(data);
+            .then((res) => {
+                setChartData(res.data);
             })
     }, [])
 
