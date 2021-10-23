@@ -4,6 +4,7 @@ import HomePage from 'pages/HomePage';
 import MarketPage from 'pages/MarketPage';
 import ChartPage from 'pages/ChartPage';
 import AssetPage from 'pages/AssetPage';
+import RedirectPop from 'components/auth/RedirectPop'
 
 import { GlobalStyle } from 'helpers/styles'
 
@@ -15,6 +16,7 @@ const App = () => {
        <Route component={MarketPage} path='/market' exact />
        <Route component={ChartPage} path='/chart/@:coin' exact />
        <Route component={AssetPage} path='/asset' exact />
+       <Route component={RedirectPop} path='/redirect' />
     </>
   );
 }

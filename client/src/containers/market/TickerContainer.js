@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { initializeTicker, changeTickerField } from 'modules/saveTickers';
+import { initializeTicker, changeTickerField } from 'modules/tickers';
 import TickerSocket from 'components/market/TickerSocket';
 
 const TickerContainer = () => {
