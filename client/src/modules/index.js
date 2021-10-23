@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import saveTickers from './saveTickers'; 
+import tickers from './tickers'; 
 
 const rootReducer = combineReducers({
-    saveTickers,
+    tickers,
 })
 
 export default rootReducer;

@@ -23,7 +23,6 @@ const TableItem = ({ coin }) => {
     const refinedDailyP = Math.round(dailyP * 100) / 100
     
     return (
-        // <Link to='/'>
         <TableItemLink to={`/chart/@${coin.name}`}>
             {coin !== null ? 
             <>
@@ -36,7 +35,6 @@ const TableItem = ({ coin }) => {
             <></>
             }
         </TableItemLink>
-        // </Link>
     )
 }
 
