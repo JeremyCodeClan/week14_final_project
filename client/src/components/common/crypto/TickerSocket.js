@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { coinProductIdArr, coinLists } from 'helpers/coinlist/coinList';
 
-const TickerSocket = ({ socketTicker, initialTicker }) => {
+const TickerSocket = ({ socketTicker, initialTicker, crpytoIdArr, cryptoLists }) => {
 
     useEffect(() => {
         // ticker socket setting
@@ -12,7 +11,7 @@ const TickerSocket = ({ socketTicker, initialTicker }) => {
                 "channels": [
                     {
                         "name": "ticker",
-                        "product_ids": coinProductIdArr
+                        "product_ids": crpytoIdArr
                     }
                 ]
             }))
@@ -26,7 +25,7 @@ const TickerSocket = ({ socketTicker, initialTicker }) => {
                 openPrice: parseFloat(messageObj.open_24h),
                 dailyVolume: parseFloat(messageObj.volume_24h)
             }
-            coinLists.forEach((coin, index) => {
+            cryptoLists.forEach((coin, index) => {
                 if (refinedData.name === coin.product_id) { 
                     socketTicker({ key: coin.stateKey, value: {...refinedData, capRank: index + 1} }) 
                 }

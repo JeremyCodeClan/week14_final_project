@@ -17,19 +17,31 @@ const TableItemLink = styled(Link)`
     }
 `;
 
-const TableItem = ({ coin }) => {
+const TableItem = ({ coin, gbpRate }) => {
 
-    const dailyP = ((coin.currentPrice / coin.openPrice) - 1) * 100;
-    const refinedDailyP = Math.round(dailyP * 100) / 100
+    // prices
+    let dailyPrice;
+    if (coin.currentPrice > 10000) dailyPrice = (coin.currentPrice * gbpRate).toFixed(2);
+    if (coin.currentPrice < 10000 && coin.currentPrice > 1000) dailyPrice = (coin.currentPrice * gbpRate).toFixed(3);
+    if (coin.currentPrice < 1000 && coin.currentPrice > 100) dailyPrice = (coin.currentPrice * gbpRate).toFixed(4);
+    if (coin.currentPrice < 100 && coin.currentPrice > 10) dailyPrice = (coin.currentPrice * gbpRate).toFixed(5);
+    if (coin.currentPrice < 10 && coin.currentPrice > 1) dailyPrice = (coin.currentPrice * gbpRate).toFixed(6);
+    if (coin.currentPrice < 1 && coin.currentPrice > 0.1) dailyPrice = (coin.currentPrice * gbpRate).toFixed(6);
+    if (coin.currentPrice < 0.1) dailyPrice = (coin.currentPrice * gbpRate).toFixed(6);
+    const dailyVol = (coin.currentPrice * coin.dailyVolume / 1000000).toFixed(3);
+
+    // percentages
+    const dailyPercentage = (((coin.currentPrice / coin.openPrice) - 1) * 100).toFixed(2);
+    const refinedDailyPer = Math.round(dailyPercentage * 100) / 100;
     
     return (
         <TableItemLink to={`/chart/@${coin.name}`}>
             {coin !== null ? 
             <>
                 <div className="testText">{coin.name}</div>
-                <div className="testText">{coin.currentPrice}</div>
-                <div className="testText">{refinedDailyP} %</div>
-                <div className="testText">{coin.dailyVolume}</div>
+                <div className="testText">{dailyPrice}</div>
+                <div className="testText">{refinedDailyPer} %</div>
+                <div className="testText">{dailyVol}</div>
             </>
             :
             <></>

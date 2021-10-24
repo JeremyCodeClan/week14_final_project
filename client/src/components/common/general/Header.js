@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Responsive from 'components/common/Responsive';
+import Responsive from 'components/common/general/Responsive';
 
 const HeaderBlock = styled.div`
     position: fixed;
@@ -12,7 +12,7 @@ const HeaderBlock = styled.div`
 `;
 
 const NavBlock = styled(Responsive)`
-    height: 4.5rem;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

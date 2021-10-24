@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import HeaderContainer from 'containers/common/HeaderContainer';
-import FooterContainer from 'containers/common/FooterContainer';
+import HeaderContainer from 'containers/common/general/HeaderContainer';
+import FooterContainer from 'containers/common/general/FooterContainer';
 import { withRouter, useLocation } from 'react-router-dom';
 
 const ContentBlock = styled.div`

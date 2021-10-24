@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Responsive from 'components/common/Responsive';
+import Responsive from 'components/common/general/Responsive';
 import AboutContainer from 'containers/chart/AboutContainer';
 import InvestInfoContainer from 'containers/chart/InvestInfoContainer';
 

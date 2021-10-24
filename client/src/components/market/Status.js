@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Responsive from 'components/common/Responsive';
+import Responsive from 'components/common/general/Responsive';
 
 const StatusBlock = styled(Responsive)`
     margin-top: 1rem;
@@ -11,7 +11,6 @@ const ContentBlock = styled.article`
     border: 1px dashed red;
     background: var(--lightest-plum);
 
-    height: 10rem;
     padding: 0.5rem;
 `;
 
@@ -32,17 +31,6 @@ const ValueBlock = styled.section`
     }
 `;
 
-const CurrencyBlock = styled.section`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lighter-plum);
-
-    float: right;
-    width: 50%;
-    height: 50%;
-    padding: 1rem;
-`;
-
 const Status = () => {
 
     return (
@@ -58,10 +46,6 @@ const Status = () => {
                         <div>Profit %: (((Total_v / Invested_v) - 1) * 100)% </div>            
                     </div>
                 </ValueBlock>
-                <CurrencyBlock>
-                    <div>Add More Currency</div>
-                    <div>Currecy Selection</div>
-                </CurrencyBlock>
             </ContentBlock>
         </StatusBlock>
     )
