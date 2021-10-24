@@ -9,6 +9,9 @@ const ChartTabBlock = styled(Responsive)`
 const ChartTabWrapper = styled.article`
     height: 3rem;
     display: flex;
+    width:100%;
+    max-width: 850px;
+    min-width: 850px;
 `;
 
 const Tabs = styled.section`

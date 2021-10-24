@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import auth
 from firebase_admin import db
 from firebase_admin import credentials
+from coinbase.wallet.client import OAuthClient
 
 from Crypto import Random
 from flask import Flask, request, redirect, jsonify, json
@@ -49,8 +50,6 @@ def history():
                 "close": data[4]
             }
             processed_candleSticks.append(candleStick)
-    print(len(processed_candleSticks))
-    print(len(processed_candleSticks))
     return jsonify(processed_candleSticks)
 
 
@@ -64,6 +63,7 @@ def auth_redirect():
     base = 'https://www.coinbase.com/oauth/authorize?'
     query_params = {
         'client_id': client_id,
+        'account': 'all',
         'client_secret': client_secret,
         'redirect_uri': redirect_uri,
         'response_type': 'code',
@@ -86,10 +86,10 @@ def token():
             'code': code
         }
     end_point = base + urlencode(query_params)
-    login = requests.post(end_point)
-    login_response = json.loads(login.text)
-    access_token = login_response['access_token']
-    refresh_token = login_response['refresh_token']
+    signin = requests.post(end_point)
+    signin_response = json.loads(signin.text)
+    access_token = signin_response['access_token']
+    refresh_token = signin_response['refresh_token']
     user = getCoinbaseUser(access_token)
     uid = 'coinbase:' + user['id']
     authToken = auth.create_custom_token(uid)
@@ -100,9 +100,40 @@ def token():
 @app.route('/signout')
 def signout():
     base = 'https://www.coinbase.com/oauth/revoke?'
-    db.reference()
+    uid = request.args['uid']
+    accessToken = db.reference(f'coinbaseTokens/coinbase:{uid}/access_token').get()
+    refreshToken = db.reference(f'coinbaseTokens/coinbase:{uid}/refresh_token').get()
+    oauth_client = OAuthClient(accessToken, refreshToken)
+    oauth_client.revoke()
+    # query_params = { 'token': accessToken }
+    # end_point = base + urlencode(query_params)
+    # signout = requests.post(end_point, headers={'Authorization': f'Bearer {accessToken}'})
+    # signout_response = json.loads(signout.text)
+    # print(signout_response)
+    db.reference('coinbaseTokens').set({})
+    return "approved"
 
-    
+
+@app.route('/get_assets')
+def get_assets():
+    uid = request.args['uid']
+    oauth_client = returnOAuthClient(uid)
+    accounts = oauth_client.get_accounts()
+    processed_accounts = []
+    if accounts is not None:
+        for data in accounts['data']:
+            if float(data['balance']['amount']) != 0.0:
+                processed_accounts.append(data['balance'])
+    return jsonify(processed_accounts)
+
+
+@app.route('/get_profile')
+def get_profile():
+    uid = request.args['uid']
+    oauth_client = returnOAuthClient(uid)
+    user = oauth_client.get_current_user()
+    user_as_json_string = json.dumps(user)
+    return jsonify(user_as_json_string)
 
 
 def getCoinbaseUser(accessToken):
@@ -110,6 +141,11 @@ def getCoinbaseUser(accessToken):
     user = requests.get(userUrl, headers={'Authorization': f'Bearer {accessToken}'})
     user_response = json.loads(user.text)
     return user_response['data']
+
+def returnOAuthClient(uid):
+    accessToken = db.reference(f'coinbaseTokens/coinbase:{uid}/access_token').get()
+    refreshToken = db.reference(f'coinbaseTokens/coinbase:{uid}/refresh_token').get()
+    return OAuthClient(accessToken, refreshToken)
 
 
 if __name__ == '__main__':
