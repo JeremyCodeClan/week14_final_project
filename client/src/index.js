@@ -2,22 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { PERSIST, persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import { createStore, applyMiddleware } from 'redux';
+import { createStateSyncMiddleware, initMessageListener } from 'redux-state-sync';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './modules';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const reduxStateSyncConfig = {blacklist: [PERSIST]};
+
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware())
+  composeWithDevTools(applyMiddleware(createStateSyncMiddleware(reduxStateSyncConfig)))
 );
+
+initMessageListener(store)
+const persistor = persistStore(store);
 
 ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>,
   document.getElementById('root')
 );

@@ -1,28 +1,26 @@
 import React, { useEffect } from 'react';
-import { withRouter } from 'react-router';
-import authService from 'helpers/firebaseServices/authService';
+import firebaseAuth from 'helpers/firebase/firebaseAuth';
 import * as coinSerivce from 'helpers/api/service';
 
-const RedirectPop = ({ location }) => {
+const RedirectPop = ({ code, userId, signedInSaveUid }) => {
 
     useEffect(() => {
-        const queryString = location.search;
-        const code = new URLSearchParams(queryString).get("code")
-        
         coinSerivce.redirectToken(code)
             .then((res) => {
-                authService.customerSignIn(res.data)
+                firebaseAuth.customerSignIn(res.data)
                     .then((res) => {
-                        console.log(res)
+                        const parsedUid = res.user.uid.split(':')[1];
+                        if (userId === null) {
+                            signedInSaveUid(parsedUid)
+                        }
+                        window.close()
                     })
             })
     }, [])
-
-
 
     return (
         <h2>accessing...</h2>
     )
 }
 
-export default withRouter(RedirectPop);
+export default RedirectPop;

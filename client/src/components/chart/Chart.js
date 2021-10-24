@@ -7,6 +7,7 @@ import { createChart, CrosshairMode } from 'lightweight-charts';
 
 const ChartBlock = styled(Responsive)`
     margin-top: 1rem;
+    z-index: 0;
 `;
 
 const ChartWrapper = styled.section`

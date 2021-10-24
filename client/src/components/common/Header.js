@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from 'components/common/Responsive';
-import firebase from 'firebase';
-
 
 const HeaderBlock = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
     background: var(--brightest-white);
 `;
 
@@ -46,12 +44,7 @@ const NavItems = styled.ul`
     }
 `;
 
-const Header = () => {
-
-    const signinFnc = () => firebase.signin();
-    const signoutFnc = async () => firebase.signout();
-
-    console.log(firebase.getAccessToken());
+const Header = ({ userId, signinFnc, signoutFnc }) => {
 
     return (
         <HeaderBlock>
@@ -60,9 +53,16 @@ const Header = () => {
                 <NavItemBlock>
                 <NavItems>
                     <li className="nav-item"><Link to='/market'>Market</Link></li>
-                    <li className="nav-item"><Link to='/asset'>My Asset</Link></li>
-                    <li className="nav-item" onClick={signinFnc}>Sign-in</li>
-                    <li className="nav-item" onClick={signoutFnc}>Sign-out</li>
+                    { userId === null ?
+                        (
+                            <li className="nav-item" onClick={signinFnc}>Sign-in</li>
+                        ):(
+                        <>
+                            <li className="nav-item"><Link to='/asset'>My Asset</Link></li>
+                            <li className="nav-item" onClick={signoutFnc}>Sign-out</li>
+                        </>
+                        )
+                    }
                 </NavItems>
                 </NavItemBlock>
             </NavBlock>

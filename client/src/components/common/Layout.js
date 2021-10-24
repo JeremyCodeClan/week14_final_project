@@ -10,6 +10,7 @@ const ContentBlock = styled.div`
 `;
 
 const Layout = ({ children }) => {
+
     const location = useLocation();
 
     return (
