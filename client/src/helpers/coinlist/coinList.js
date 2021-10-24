@@ -19,7 +19,6 @@ export const coinLists = [
     { product_id: "AXS-USD", stateKey: "axs_usd" },
     { product_id: "FIL-USD", stateKey: "fil_usd" },
     { product_id: "ETC-USD", stateKey: "etc_usd" },
-    
 ]
 
 export const coinProductIdArr = coinLists.map((arr, i) => arr.product_id);

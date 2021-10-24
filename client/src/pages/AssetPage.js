@@ -1,10 +1,14 @@
 import React from 'react';
-import Layout from 'components/common/Layout'
+import Layout from 'components/common/general/Layout';
+import TickerContainer from 'containers/common/crypto/TickerContainer';
+import StatusContainer from 'containers/market/StatusContainer';
 
 const AssetPage = () => {
     return (
         <Layout>
-            <h1>Asset Page</h1>
+            <TickerContainer myAsset="true" />
+            <StatusContainer />
+
         </Layout>
     )
 }

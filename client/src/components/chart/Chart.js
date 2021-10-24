@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import Responsive from 'components/common/Responsive'
+import Responsive from 'components/common/general/Responsive';
 import styled from 'styled-components';
 import * as coinSerivce from 'helpers/api/service';
 import { createChart, CrosshairMode } from 'lightweight-charts';

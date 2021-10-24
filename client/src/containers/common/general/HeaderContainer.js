@@ -6,7 +6,7 @@ import { saveAssets, initializeAssets } from 'modules/userAssets';
 import { saveUserProfile, initializeUserProfile } from 'modules/userProfile';
 import * as service from 'helpers/api/service';
 import firebaseAuth from 'helpers/firebase/firebaseAuth';
-import Header from 'components/common/Header'
+import Header from 'components/common/general/Header'
 
 const HeaderContainer = () => {
 

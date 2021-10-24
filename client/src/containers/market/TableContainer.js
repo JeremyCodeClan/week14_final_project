@@ -5,8 +5,9 @@ import TableList from 'components/market/TableList'
 const TableContainer = () => {
     const { 
         btc_usd, eth_usd, ada_usd, sol_usd, dot_usd, doge_usd, uni_usd, avax_usd, link_usd, ltc_usd, 
-        bch_usd, algo_usd, shib_usd, matic_usd, xlm_usd, atom_usd, icp_usd, axs_usd, fil_usd, etc_usd
-    } = useSelector(({ tickers }) => ({
+        bch_usd, algo_usd, shib_usd, matic_usd, xlm_usd, atom_usd, icp_usd, axs_usd, fil_usd, etc_usd,
+        gbpRate
+    } = useSelector(({ tickers, currencyGbp }) => ({
         btc_usd: tickers.btc_usd,
         eth_usd: tickers.eth_usd,
         ada_usd: tickers.ada_usd,
@@ -28,7 +29,8 @@ const TableContainer = () => {
         icp_usd: tickers.icp_usd,
         axs_usd: tickers.axs_usd,
         fil_usd: tickers.fil_usd,
-        etc_usd: tickers.etc_usd
+        etc_usd: tickers.etc_usd,
+        gbpRate: currencyGbp.rate,
     }))
 
     const coinArr = [
@@ -37,7 +39,7 @@ const TableContainer = () => {
     ]
 
     return (
-        <TableList coinArr={coinArr}/>
+        <TableList coinArr={coinArr} gbpRate={gbpRate} />
     )
 }
 

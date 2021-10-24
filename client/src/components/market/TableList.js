@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Reponsive from 'components/common/Responsive';
 import TableItem from 'components/market/TableItem';
+import Responsive from 'components/common/general/Responsive';
 import { withRouter } from 'react-router-dom';
 
-const TableListBlock = styled(Reponsive)`
+const TableListBlock = styled(Responsive)`
     margin-top: 2rem;
 `;
 
@@ -16,11 +16,11 @@ const TableListWrapper = styled.article`
     padding: 0 1rem;
 `;
 
-const TableList = (props) => {
+const TableList = ({ coinArr, gbpRate }) => {
 
     // testing
-    const coinTableNode = props.coinArr.map((val, index) => {
-        if (val !== null) { return <TableItem key={index} coin={val} /> }
+    const coinTableNode = coinArr.map((val, index) => {
+        if (val !== null) { return <TableItem key={index} coin={val} gbpRate={gbpRate} /> }
     })
 
     return (

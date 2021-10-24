@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Responsive from 'components/common/Responsive';
+import Responsive from 'components/common/general/Responsive';
 
 const PriceBlock = styled(Responsive)`
     margin-top: 2rem;
