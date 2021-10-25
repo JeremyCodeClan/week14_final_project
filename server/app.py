@@ -118,6 +118,7 @@ def signout():
 def get_assets():
     uid = request.args['uid']
     oauth_client = returnOAuthClient(uid)
+    print(oauth_client)
     accounts = oauth_client.get_accounts()
     processed_accounts = []
     if accounts is not None:

@@ -27,7 +27,7 @@ const TickerSocket = ({ socketTicker, initialTicker, crpytoIdArr, cryptoLists })
             }
             cryptoLists.forEach((coin, index) => {
                 if (refinedData.name === coin.product_id) { 
-                    socketTicker({ key: coin.stateKey, value: {...refinedData, capRank: index + 1} }) 
+                    socketTicker({ product: coin.stateKey, key: 'value', data: {...refinedData, capRank: index + 1} })
                 }
             })
         }

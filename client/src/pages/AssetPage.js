@@ -1,14 +1,15 @@
 import React from 'react';
 import Layout from 'components/common/general/Layout';
-import TickerContainer from 'containers/common/crypto/TickerContainer';
-import StatusContainer from 'containers/market/StatusContainer';
+import MyTickerContainer from 'containers/asset/MyTickerContainer';
+import StatusContainer from 'containers/asset/StatusContainer';
+import AssetTableCointainer from 'containers/asset/AssetTableCointainer';
 
 const AssetPage = () => {
     return (
         <Layout>
-            <TickerContainer myAsset="true" />
+            <MyTickerContainer />
             <StatusContainer />
-
+            <AssetTableCointainer />
         </Layout>
     )
 }

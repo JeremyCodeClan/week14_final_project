@@ -17,10 +17,11 @@ const TableListWrapper = styled.article`
 `;
 
 const TableList = ({ coinArr, gbpRate }) => {
+    
 
     // testing
     const coinTableNode = coinArr.map((val, index) => {
-        if (val !== null) { return <TableItem key={index} coin={val} gbpRate={gbpRate} /> }
+        if (val.value !== null) { return <TableItem key={index} coin={val} gbpRate={gbpRate} /> }
     })
 
     return (

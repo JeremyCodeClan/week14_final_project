@@ -59,23 +59,18 @@ const CurrencyBlock = styled.section`
     }
 `;
 
-const Price = () => {
+const Price = ({ openRef, closeRef, highRef, lowRef }) => {
     return (
         <PriceBlock>
             <ContentBlock>
+                <div>Candle Chart</div>
                 <ValueSection>
-                    <div className="big-value">CurrentPrice (ticker)</div>
-                    <div className="small-group">
-                        <div className="small-value">Daily % (ticker)</div>
-                        <div className="small-value">Daily ▲▼amount (ticker)</div>
-                    </div>
+                    <div className="closeRef" ref={closeRef}>Loading...</div>
+                    <div className="openRef" ref={openRef}>Loading...</div>
                 </ValueSection>
                 <CurrencyBlock>
-                    <div className="big-value">Current Currency 💸 (custom)</div>
-                    <div className="small-group">
-                        <div className="small-value">[Option Bar]</div>
-                        <div className="small-value">[Add Currency]</div>
-                    </div>
+                    <div className="highRef" ref={highRef}>Loading...</div>
+                    <div className="lowRef" ref={lowRef}>Loading...</div>
                 </CurrencyBlock>
             </ContentBlock>
         </PriceBlock>

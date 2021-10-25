@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     --lightest-steel: #d0dbff;
     --lightestest-steel: #dfe6ff;
     --white: #eaf3ff;
+    --whiter: #edf0f7;
     --bright-white: #f7fbff;
     --brightest-white: #fdfeff;
 	--lightest-teal: #e6fff6;
