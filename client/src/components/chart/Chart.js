@@ -15,10 +15,11 @@ const ChartWrapper = styled.section`
     margin: 0 auto;
 `;
 
-const Chart = ({ coinQuery }) => {
+const Chart = ({ coinQuery, openRef, closeRef, highRef, lowRef }) => {
 
     const chartRef = useRef();
     const chartWrap = useRef();
+
     const [chartData, setChartData] = useState(null);
 
     useEffect(() => {
@@ -68,6 +69,7 @@ const Chart = ({ coinQuery }) => {
                 const messageObj = JSON.parse(e.data);
                 // kline chart
                 const chartData = messageObj.k;
+                console.log(messageObj)
                 const refinedChartData = {
                     time: chartData.t / 1000,
                     open: chartData.o,
@@ -76,6 +78,10 @@ const Chart = ({ coinQuery }) => {
                     close: chartData.c
                 }
                 candleSeries.update(refinedChartData);
+                if (openRef.current.innerHTML) openRef.current.innerHTML = (parseFloat(chartData.o)).toFixed(4);
+                if (closeRef.current.innerHTML) closeRef.current.innerHTML = (parseFloat(chartData.c)).toFixed(4);
+                if (highRef.current.innerHTML) highRef.current.innerHTML = (parseFloat(chartData.h)).toFixed(4);
+                if (lowRef.current.innerHTML) lowRef.current.innerHTML = (parseFloat(chartData.l)).toFixed(4);
             }
 
             new ResizeObserver(entries => { 
@@ -101,94 +107,3 @@ const Chart = ({ coinQuery }) => {
 };
 
 export default Chart;
-
-// const chartRef = useRef();
-
-// const [chartData, setChartData] = useState(null);
-// // const [chart, setChart] = useState(null);
-
-// // const [height, setHeight] = useState(300);
-
-// // const onChangeHeight = (e) => {
-// //     setHeight(parseInt(e.target.value));
-// // }
-
-// // // chart settings
-// // useEffect(() => {
-// //     if (chart !== null) {
-// //         chart.resize(600, height);
-// //     }
-// // }, [height, chart])
-
-// useEffect(() => {
-//     fetch('http://localhost:5000/history')
-//     .then((r) => r.json())
-//     .then((response) => {
-//         setChartData(response);
-//     })
-// }, [])
-
-// // generate chart
-// useEffect(() => {
-//     if (chartData !== null) {
-//     const chart = createChart(chartRef.current.id, {
-//         width: 600,
-//         height: 300,
-//         layout: {
-//             backgroundColor: '#ffffff',
-//             textColor: 'rgba(0, 0, 0, 0.9)',
-//         },
-//         grid: {
-//             vertLines: {
-//                 color: 'rgba(197, 203, 206, 0.5)',
-//             },
-//             horzLines: {
-//                 color: 'rgba(197, 203, 206, 0.5)',
-//             },
-//         },
-//         crosshair: {
-//             mode: CrosshairMode.Normal,
-//         },
-//         rightPriceScale: {
-//             borderColor: 'rgba(197, 203, 206, 0.8)',
-//         },
-//         timeScale: {
-//             borderColor: 'rgba(197, 203, 206, 0.8)',
-//         },
-//     });
-//     // setChart(chart);
-
-//     const candleSeries = chart.addCandlestickSeries({
-//         upColor: 'rgba(255, 144, 0, 1)',
-//         downColor: '#ff1010',
-//         borderDownColor: 'rgba(0, 0, 0, 1)',
-//         borderUpColor: 'rgba(0, 0, 0, 1)',
-//         wickDownColor: 'rgba(255, 144, 0, 1)',
-//         wickUpColor: 'rgba(255, 144, 0, 1)',
-//     });
-
-//     candleSeries.setData(chartData);
-    
-//     const socketCoin = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@kline_1m");
-//     socketCoin.onmessage = (e) => {
-//         const messageObj = JSON.parse(e.data);
-
-//         // kline chart
-//         const chartData = messageObj.k;
-//         const refinedChartData = {
-//             time: chartData.t / 1000,
-//             open: chartData.o,
-//             high: chartData.h,
-//             low: chartData.l,
-//             close: chartData.c
-//         }
-//         candleSeries.update(refinedChartData);
-//     }
-
-//     socketCoin.onclose = () => {
-//         setTimeout(() => {
-//             setChartData(null);
-//         }, 1000);
-//     };
-// }
-// }, [chartData])

@@ -6,8 +6,7 @@ const TableContainer = () => {
     const { 
         btc_usd, eth_usd, ada_usd, sol_usd, dot_usd, doge_usd, uni_usd, avax_usd, link_usd, ltc_usd, 
         bch_usd, algo_usd, shib_usd, matic_usd, xlm_usd, atom_usd, icp_usd, axs_usd, fil_usd, etc_usd,
-        gbpRate
-    } = useSelector(({ tickers, currencyGbp }) => ({
+    } = useSelector(({ tickers }) => ({
         btc_usd: tickers.btc_usd,
         eth_usd: tickers.eth_usd,
         ada_usd: tickers.ada_usd,
@@ -30,13 +29,14 @@ const TableContainer = () => {
         axs_usd: tickers.axs_usd,
         fil_usd: tickers.fil_usd,
         etc_usd: tickers.etc_usd,
-        gbpRate: currencyGbp.rate,
     }))
 
     const coinArr = [
         btc_usd, eth_usd, ada_usd, sol_usd, dot_usd, doge_usd, uni_usd, avax_usd, link_usd, ltc_usd, 
         bch_usd, algo_usd, shib_usd, matic_usd, xlm_usd, atom_usd, icp_usd, axs_usd, fil_usd, etc_usd
     ]
+
+    const { gbpRate } = useSelector(({ currencyGbp }) => ({ gbpRate: currencyGbp.rate }))
 
     return (
         <TableList coinArr={coinArr} gbpRate={gbpRate} />

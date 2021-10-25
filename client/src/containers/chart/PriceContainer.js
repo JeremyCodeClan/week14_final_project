@@ -1,9 +1,14 @@
 import React from 'react';
 import Price from 'components/chart/Price';
 
-const PriceContainer = () => {
+const PriceContainer = ({ openRef, closeRef, highRef, lowRef }) => {
     return (
-        <Price />
+        <Price 
+            openRef={openRef} 
+            closeRef={closeRef} 
+            highRef={highRef} 
+            lowRef={lowRef}
+        />
     )
 }
 

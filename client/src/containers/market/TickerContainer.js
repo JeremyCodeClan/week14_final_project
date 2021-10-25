@@ -1,29 +1,22 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { initializeTicker, changeTickerField } from 'modules/tickers';
-import TickerSocket from 'components/common/crypto/TickerSocket';
-import { coinProductIdArr, coinLists } from 'helpers/coinlist/coinList';
+import TickerSocket from 'components/market/TickerSocket';
+import { coinProductIdArr, coinLists } from 'helpers/coinlist/coinData';
 
 
-const TickerContainer = ({ myAsset }) => {
+const TickerContainer = () => {
     
     const dispatch = useDispatch();
-    const {  } = useSelector(({ }) => {
-        
-    })
-
-    if (myAsset) {
-        console.log(myAsset);
-    }
 
     const socketTicker = useCallback((payload) => dispatch(changeTickerField(payload)), [dispatch]);
-    const initialTicker = useCallback(() => dispatch(initializeTicker()), [dispatch]); 
+    const initialTicker = useCallback((payload) => dispatch(initializeTicker(payload)), [dispatch]);
 
     return (
         <>
-            <TickerSocket 
+            <TickerSocket
                 socketTicker={socketTicker} 
-                initialTicker={initialTicker} 
+                initialTicker={initialTicker}
                 crpytoIdArr={coinProductIdArr} 
                 cryptoLists={coinLists}
             />

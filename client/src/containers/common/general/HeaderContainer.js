@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { initializeUid } from 'modules/auth';
 import { saveAssets, initializeAssets } from 'modules/userAssets';
 import { saveUserProfile, initializeUserProfile } from 'modules/userProfile';
+import { coinObjects } from 'helpers/coinlist/coinData';
 import * as service from 'helpers/api/service';
 import firebaseAuth from 'helpers/firebase/firebaseAuth';
 import Header from 'components/common/general/Header'
@@ -46,13 +47,29 @@ const HeaderContainer = () => {
         if (userId !== null &&  profile === null && assets === null) {
             service.getAssets(userId)
                 .then((res) => {
+                    const convertArrayToObject = (array, key) => {
+                        const initialValue = {};
+                        return array.reduce((obj, item) => {
+                          return {
+                            ...obj,
+                            [item[key]]: item,
+                          };
+                        }, initialValue);
+                      };
                     let refinedData = res.data.map((coin, index) => {
                         return { 
                             name: coin.currency,
-                            amount: parseFloat(coin.amount)
+                            amount: parseFloat(coin.amount),
+                            fullname: coinObjects[coin.currency].fullName,
+                            product_id: coinObjects[coin.currency].product_id,
+                            currentValue: null,
+                            openValue: null,
+                            currentTotal: null,
+                            openTotal: null,
                         }
                     })
-                    onSaveAssets(refinedData)
+                    let newRefined = convertArrayToObject(refinedData, 'name');
+                    onSaveAssets(newRefined)
             })
             service.getProfile(userId)
                 .then((res) => {

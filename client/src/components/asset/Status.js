@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Responsive from 'components/common/general/Responsive';
 
@@ -31,19 +31,31 @@ const ValueBlock = styled.section`
     }
 `;
 
-const Status = () => {
+const Status = ({ myAssets, coinProductIdArr, gbpRate }) => {
+
+    let dailyTotal = 0;
+    let openTotal = 0;
+
+    if (coinProductIdArr !== []) {
+        coinProductIdArr.forEach((one, i) => {
+            if (myAssets[one].currentTotal !== null) {
+                dailyTotal += parseFloat(myAssets[one].currentTotal);
+                openTotal += parseFloat(myAssets[one].openTotal);
+            }
+        })
+    }
 
     return (
         <StatusBlock>
             <ContentBlock>
                 <ValueBlock>
                     <div className='values'>
-                        <div>Invested_v: ++(every invested coins * Initial_price) </div>
-                        <div>Total_v: (Invested_v + Total_Profit) </div>
+                        <div>Total balance</div>
+                        <div>£ {(dailyTotal * gbpRate).toFixed(4)}</div>
                     </div>
                     <div className='values'>
-                        <div>Total_Profit: ++(every coin profits)</div>
-                        <div>Profit %: (((Total_v / Invested_v) - 1) * 100)% </div>            
+                        <div>Daily Profit</div>
+                        <div>{((dailyTotal / openTotal - 1) * 100).toFixed(4)} %</div>            
                     </div>
                 </ValueBlock>
             </ContentBlock>
