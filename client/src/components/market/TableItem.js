@@ -9,14 +9,18 @@ const TableItemBlock = styled.article`
 
 const TableItemLink = styled(Link)`
     border-top: 1px solid var(--lightestestest-navy);
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid var(--lightestestest-navy);
     padding: 1rem 1rem;
     margin: 1rem auto;
     display: flex;
     justify-content: space-evenly;
 
+    :hover {
+        background: var(--bright-white);
+    }
+
     background: var(--brightest-white);
-    .testText { color: var(--light-navy); }
+    .testText, .price-Text { color: var(--lightestest-navy); }
     .image-name-block {
         display: flex;
         width: 40%;
@@ -47,6 +51,7 @@ const TableItemLink = styled(Link)`
         display: flex;
         flex-direction: column;
     }
+    .price-Text { font-size: var(--ft-lg); }
 `;
 
 const TableItem = ({ coin, gbpRate }) => {
@@ -75,13 +80,13 @@ const TableItem = ({ coin, gbpRate }) => {
                     </div>
                     
                     <div className="dailyPrice-block">
-                        <div className="testText">{dailyPrice}</div>
+                        <div className="price-Text">{dailyPrice}</div>
                     </div>
                     <div className="dailyPer-block">
-                        <div className="testText">{refinedDailyPer} %</div>
+                        <div className="price-Text" style={{ color: refinedDailyPer < 0 ? "#343aed" : "#eb4034" }}>{refinedDailyPer} %</div>
                     </div>
                     <div className="dailyVol-block">
-                        <div className="testText">{dailyVol}</div>
+                        <div className="price-Text">{dailyVol}</div>
                     </div>
                 </>
                 :

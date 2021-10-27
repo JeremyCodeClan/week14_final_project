@@ -32,18 +32,12 @@ const Tabs = styled.section`
             padding: 0.15rem 0.5rem;
             font-size: var(--ft-md);
             color: var(--darkest-orange);
+            :hover {
+                color: var(--darker-orange);
+            }
         }
     }
 `;
-
-// const TitleBlock = styled.article`
-//     margin-left: 1.5rem;
-//     margin-bottom: 1rem;
-//     .title-text {
-//         font-size: var(--ft-sm-heading);
-//         color: var(--lightestest-navy);
-//     }
-// `;
 
 
 const ChartTab = ({ handleChartInterval, chartInterval }) => {
@@ -56,23 +50,38 @@ const ChartTab = ({ handleChartInterval, chartInterval }) => {
         <>
             <ChartTabBlock>
                 <ChartTabWrapper>
-                    {/* <TitleBlock>
-                        <div className="title-text">
-                            Kline Chart
-                        </div>
-                    </TitleBlock> */}
                     <Tabs>
                         <section className="tab-block">
-                            <div className="tab-value" value='1m' onClick={onChangeChartInterval}>1m</div>
+                            <div className="tab-value" value='1m' onClick={onChangeChartInterval}
+                                style={{ 
+                                    background: chartInterval === '1m' ? "#f26900" : "#fdfeff",
+                                    color: chartInterval === '1m' ? "#fdfeff" : "#f26900",
+                                }}
+                            >1m</div>
                         </section>
                         <section className="tab-block">
-                            <div className="tab-value" value='1h' onClick={onChangeChartInterval}>1h</div>
+                            <div className="tab-value" value='1h' onClick={onChangeChartInterval}
+                                style={{ 
+                                    background: chartInterval === '1h' ? "#f26900" : "#fdfeff",
+                                    color: chartInterval === '1h' ? "#fdfeff" : "#f26900"
+                                }}
+                            >1h</div>
                         </section>
                         <section className="tab-block">
-                            <div className="tab-value" value='1d' onClick={onChangeChartInterval}>1d</div>
+                            <div className="tab-value" value='1d' onClick={onChangeChartInterval}
+                                style={{ 
+                                    background: chartInterval === '1d' ? "#f26900" : "#fdfeff",
+                                    color: chartInterval === '1d' ? "#fdfeff" : "#f26900"
+                                    }}
+                            >1d</div>
                         </section>
                         <section className="tab-block">
-                            <div className="tab-value" value='1w' onClick={onChangeChartInterval}>1w</div>
+                            <div className="tab-value" value='1w' onClick={onChangeChartInterval}
+                                style={{ 
+                                    background: chartInterval === '1w' ? "#f26900" : "#fdfeff",
+                                    color: chartInterval === '1w' ? "#fdfeff" : "#f26900"
+                                    }}
+                            >1w</div>
                         </section>
                     </Tabs>
                 </ChartTabWrapper>
