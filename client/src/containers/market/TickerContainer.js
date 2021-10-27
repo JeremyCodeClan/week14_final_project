@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch  } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { initializeTicker, changeTickerField } from 'modules/tickers';
 import TickerSocket from 'components/market/TickerSocket';
 import { coinProductIdArr, coinLists } from 'helpers/coinlist/coinData';

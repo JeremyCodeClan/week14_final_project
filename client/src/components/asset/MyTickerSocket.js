@@ -38,7 +38,7 @@ const MyTickerSocket = ({ onChangeMyTicker, crpytoIdArr, cryptoLists, assets }) 
                 }
             })
         }
-
+        
         // disconnect socket & initialize state
         return () => {
             socketCoin.close();

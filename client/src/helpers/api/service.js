@@ -1,8 +1,8 @@
 import client from 'helpers/api/client';
 
 // binance chart api
-export const getChartHistory = (coinQuery) => {
-    return client.get(`history?type=${coinQuery}`);
+export const getChartHistory = (coinQuery, chartInterval) => {
+    return client.get(`history?type=${coinQuery}&time=${chartInterval}&gbp=73`);
 }
 
 // coinbase auth api 

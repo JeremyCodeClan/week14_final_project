@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 	--dark-navy: #020d1f;
     --navy: #0a192f;
 	--navy-shadow: rgba(2, 12, 27, 0.7);
-    --light-navy: #172a45;
+    --light-navy: #242d42;
     --lightest-navy: #303C55;
     --lightestest-navy: #5b6e94;
     --lightestestest-navy: #7c95c7;
@@ -42,6 +42,13 @@ const GlobalStyle = createGlobalStyle`
     --bluish: #647afa;
     --dark-bluish: #5669d6;
     --darkest-bluish: #4756ad;
+
+    --chart-up: #ff4747;
+    --chart-down: #5145ff;
+
+    --lightest-orange: #ffede0;
+    --darker-orange: #ff903b;
+    --darkest-orange: #f26900;
     --teal-tint: rgba(100, 122, 250, 0.1);
 
 	/* global font-size */
@@ -112,6 +119,10 @@ const GlobalStyle = createGlobalStyle`
 	div {
 		box-sizing: inherit;
 	}
+
+    .logo-font {
+        font-family: 'Sonsie One', cursive;
+    }
 `;
 
 export default GlobalStyle;
