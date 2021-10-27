@@ -18,7 +18,7 @@ const TableMenuWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     background: var(--brightest-white);
-    .testText { color: var(--lightestest-navy); }
+    .testText { color: var(--darkest-orange); }
     .menu-image-block {
         display: flex;
         width: 40%;

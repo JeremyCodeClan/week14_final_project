@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
     --chart-up: #ff4747;
     --chart-down: #5145ff;
 
-    --lightest-orange: #ffede0;
+    --lightest-orange: #fff3eb;
     --darker-orange: #ff903b;
     --darkest-orange: #f26900;
     --teal-tint: rgba(100, 122, 250, 0.1);
@@ -61,6 +61,7 @@ const GlobalStyle = createGlobalStyle`
     --ft-xxl: 1.5rem;
     --ft-sm-heading: 1.75rem;
     --ft-heading: 2rem;
+    --ft-md-heading: 2.5rem;
     --ft-lg-heading: 3rem;
     --ft-lgest-heading: 3.5rem;
     --ft-xl-heading: 4rem;

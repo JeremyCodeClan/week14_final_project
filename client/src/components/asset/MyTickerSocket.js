@@ -1,7 +1,7 @@
-import { coinStateKeyArr } from 'helpers/coinlist/coinData';
 import React, { useEffect } from 'react';
+import { refineNum } from 'helpers/calculation/calculator';
 
-const MyTickerSocket = ({ onChangeMyTicker, crpytoIdArr, cryptoLists, assets }) => {
+const MyTickerSocket = ({ gbpRate, onChangeMyTicker, crpytoIdArr, cryptoLists, assets }) => {
 
     useEffect(() => {
         // ticker socket setting
@@ -31,8 +31,8 @@ const MyTickerSocket = ({ onChangeMyTicker, crpytoIdArr, cryptoLists, assets }) 
                     const amount = assets[coin.code].amount;
                     const current = refinedData.currentPrice;
                     const open = refinedData.openPrice;
-                    onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'currentValue', data: refinedData.currentPrice})
-                    onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'openValue', data: refinedData.openPrice})
+                    onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'currentValue', data: refineNum((parseFloat(refinedData.currentPrice)), gbpRate)})
+                    onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'openValue', data: refineNum((parseFloat(refinedData.openPrice)), gbpRate)})
                     onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'currentTotal', data: (amount * current).toFixed(4)})
                     onChangeMyTicker({ advanced: "assets", product: coin.code, key: 'openTotal', data: (amount * open).toFixed(4)})
                 }

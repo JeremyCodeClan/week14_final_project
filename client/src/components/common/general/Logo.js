@@ -5,6 +5,9 @@ import styled from 'styled-components';
 const LogoText = styled.header`
     font-size: var(--ft-lg-heading);
     color: var(--darkest-orange);
+    :hover {
+        color: var(--darker-orange);
+    }
 `
 
 const Logo = () => {

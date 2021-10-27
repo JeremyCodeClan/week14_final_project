@@ -9,14 +9,13 @@ const AsssetTableListBlock = styled(Responsive)`
 `;
 
 const AssetTableListWrapper = styled.article`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightestest-steel);
-
-    padding: 0 1rem;
+    padding: 0 1rem 4rem;
 `;
 
-const AssetTableList = ({ myAssets, coinProductIdArr, gbpRate }) => {
+const AssetTableList = ({ 
+    myAssets, coinProductIdArr, gbpRate,
+    customIcon, customCurrency
+    }) => {
     
     let dailyTotal = 0;
     if (coinProductIdArr !== []) {
@@ -45,7 +44,10 @@ const AssetTableList = ({ myAssets, coinProductIdArr, gbpRate }) => {
                 currentTotal: myAssets[coin]['currentTotal'],
                 openTotal: myAssets[coin]['openTotal'],
             }
-            return <AssetTableItem key={index} gbpRate={gbpRate} assetObj={assetObj} coinProductIdArr={coinProductIdArr} dailyTotal={dailyTotal} /> 
+            return <AssetTableItem
+                    key={index} gbpRate={gbpRate} assetObj={assetObj} coinProductIdArr={coinProductIdArr} dailyTotal={dailyTotal}
+                    customIcon={customIcon} customCurrency={customCurrency}
+                    /> 
             }
     })
 

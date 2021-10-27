@@ -28,6 +28,9 @@ const NavItems = styled.ul`
         margin-left: 2rem;
         font-size: var(--ft-xl);
         cursor: pointer;
+        :hover {
+            color: var(--light-navy);
+        }
     }
 `;
 

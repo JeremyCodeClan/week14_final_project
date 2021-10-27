@@ -126,7 +126,16 @@ const Status = ({
                             </div>
                             <div className="profit-div">
                                 <div className="profit-unit">Daily Profit %</div>
-                                <div className="profit-value" style={{ color: dailyProfit < 0 ? "#343aed" : "#eb4034" }} >{dailyProfit} %</div>
+
+
+                                <div 
+                                    className="profit-value" 
+                                    style={{ color: dailyProfit < 0 ? "#343aed" : "#eb4034" }}
+                                >
+                                    {dailyProfit} %
+                                </div>
+                            
+                            
                             </div>
                         </div>
                         

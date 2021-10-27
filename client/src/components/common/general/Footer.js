@@ -2,19 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'components/common/general/Responsive';
 
-const FooterBlock = styled(Responsive)`
-    margin-top: 3rem;
+const FooterBlock = styled.article`
+    height: 4rem;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    background: var(--lightest-navy);
 `;
 
-const ContentBlock = styled.article`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightest-teal);
-
-    height: 6rem;
-
-    .foot_placeholder {
-        font-size: var(--ft-lg-heading);
+const FooterResponsive = styled(Responsive)`
+ 
+    .foot-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .name-block {
+            display: flex;
+            align-items: center;
+            font-size: var(--ft-md);
+            color: white;
+            .designed {
+                margin-right: 0.5rem;
+            }
+            .creator-name {
+                font-size: var(--ft-xl);
+                color: var(--darker-orange);
+                font-family: 'Sonsie One', cursive;
+            }
+        }
     }
 `;
 
@@ -22,9 +41,14 @@ const Footer = () => {
 
     return (
         <FooterBlock>
-            <ContentBlock>
-                <div className="foot_placeholder">Footer Placeholder</div>
-            </ContentBlock>
+            <FooterResponsive>
+                <section className="foot-section">
+                    <div className="name-block">
+                        <div className="designed">Copyright @2021 | Designed With by</div>
+                        <div className="creator-name"> Jeremy Yoo</div>
+                    </div>
+                </section>
+            </FooterResponsive>
         </FooterBlock>
     )
 }

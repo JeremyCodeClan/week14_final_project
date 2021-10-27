@@ -38,7 +38,6 @@ def history():
     gbp_value = request.args['gbp']
     float_gbp = float(gbp_value)
     gbp_rate = float_gbp / 100
-
     try:
         if coin_time == '1m':
             candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1MINUTE, "12 hours ago UTC")
