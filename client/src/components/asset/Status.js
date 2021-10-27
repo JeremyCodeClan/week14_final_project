@@ -1,37 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import CustomCurrencyContainer from 'containers/asset/CustomCurrencyContainer';
 import Responsive from 'components/common/general/Responsive';
 
 const StatusBlock = styled(Responsive)`
-    margin-top: 1rem;
+    margin-top: 2rem;
 `;
+
 
 const ContentBlock = styled.article`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightest-plum);
-
-    padding: 0.5rem;
-`;
-
-const ValueBlock = styled.section`
     width: 100%;
     height: 50%;
 
     display: flex;
     justify-content: space-between;
     align-item: center;
-    .values {
-        /* space indicate purpose */
-        border: 1px dashed red;
-        background: var(--lighter-plum);
-
-        width: 50%;
+    .personal-contents {
         padding: 1rem;
+        display: flex;
+        justify-content: center;
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-right: 3rem;
+            .profile-name {
+                margin-top: 0.5rem;
+                color: var(--darker-orange);
+                font-family: 'Sonsie One', cursive;
+                font-size: var(--ft-lg);
+            }
+        }
+
+        .price-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .total-div { margin-bottom: 1rem; }
+            .total-div, .profit-div {
+                display: flex;
+                flex-direction: column;
+                .total-unit, .profit-unit {
+                    color: var(--lightestestest-navy);
+                    font-size: var(--ft-xl);
+                    margin-bottom: 0.25rem;
+                }
+                .total-value, .profit-value {
+                    color: var(--lightestest-navy);
+                    font-size: var(--ft-heading);
+                }
+            }
+
+        }
+    }
+    .currency-contents, .personal-contents {
+        width: 50%;
     }
 `;
 
-const Status = ({ myAssets, coinProductIdArr, gbpRate }) => {
+const ProfileImgBg = styled.section`
+    width: 150px;
+    height: 150px;
+    border: 4px solid var(--darker-orange);
+    border-radius: 100%;
+    background: url(${(props) => props.profile}) center no-repeat;
+    background-size: 145px 145px;
+`; 
+
+const Status = ({ profile, myAssets, coinProductIdArr, gbpRate }) => {
 
     let dailyTotal = 0;
     let openTotal = 0;
@@ -48,16 +86,25 @@ const Status = ({ myAssets, coinProductIdArr, gbpRate }) => {
     return (
         <StatusBlock>
             <ContentBlock>
-                <ValueBlock>
-                    <div className='values'>
-                        <div>Total balance</div>
-                        <div>£ {(dailyTotal * gbpRate).toFixed(4)}</div>
-                    </div>
-                    <div className='values'>
-                        <div>Daily Profit</div>
-                        <div>{((dailyTotal / openTotal - 1) * 100).toFixed(4)} %</div>            
-                    </div>
-                </ValueBlock>
+                <section className='personal-contents'>
+                    <section className="profile-section">
+                        <ProfileImgBg profile={profile.profileImg} />
+                        <div className="profile-name">{profile.name}</div>
+                    </section>
+                    <section className="price-section">
+                        <div className="total-div">
+                            <div className="total-unit">Total balance (£)</div>
+                            <div className="total-value">{(dailyTotal * gbpRate).toFixed(4)}</div>
+                        </div>
+                        <div className="profit-div">
+                            <div className="profit-unit">Daily Profit</div>
+                            <div className="profit-value">{((dailyTotal / openTotal - 1) * 100).toFixed(4)} %</div> 
+                        </div>
+                    </section>
+                </section>
+                <section className='currency-contents'>
+                    <CustomCurrencyContainer />
+                </section>
             </ContentBlock>
         </StatusBlock>
     )

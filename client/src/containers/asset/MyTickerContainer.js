@@ -22,12 +22,17 @@ const MyTickerContainer = () => {
 
     return (
         <>
-            <MyTickerSocket
+            {assets !== null ? (
+                <MyTickerSocket
                 onChangeMyTicker={onChangeMyTicker}
                 crpytoIdArr={coinProductIdArr}
                 cryptoLists={coinLists}
                 assets={assets}
             />
+            ):(
+            <></>
+            )}
+            
         </>        
 
     )

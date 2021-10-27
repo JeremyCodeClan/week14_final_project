@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { refineNum } from 'helpers/calculation/calculator';
 import { Link } from 'react-router-dom';
 
 const AssetTableItemBlock = styled.article`
@@ -24,20 +25,10 @@ const AssetTableItemLink = styled(Link)`
 const AssetTableItem = ({ assetObj, gbpRate, dailyTotal }) => {
 
     const amount = assetObj['amount'];
-    const currentPrice = parseFloat(refineNum(assetObj['currentValue']));
+    const currentPrice = parseFloat(refineNum(assetObj['currentValue'], gbpRate));
     const currentTotal = parseFloat(assetObj['currentTotal']);
-    const openPrice = parseFloat(refineNum(assetObj['openValue']));
+    const openPrice = parseFloat(refineNum(assetObj['openValue'], gbpRate));
     const openTotal = parseFloat(assetObj['openTotal']);
-
-    function refineNum(num) {
-        if (num > 10000) return (num * gbpRate).toFixed(2);
-        if (num < 10000 && num > 1000) return (num * gbpRate).toFixed(3);
-        if (num < 1000 && num > 100) return (num * gbpRate).toFixed(4);
-        if (num < 100 && num > 10) return (num * gbpRate).toFixed(5);
-        if (num < 10 && num > 1) return (num * gbpRate).toFixed(6);
-        if (num < 1 && num > 0.1) return (num * gbpRate).toFixed(6);
-        if (num < 0.1) return (num * gbpRate).toFixed(6);
-    } 
 
     // percentages
     const dailyPercentage = (((currentPrice / openPrice) - 1) * 100).toFixed(2);
@@ -54,6 +45,7 @@ const AssetTableItem = ({ assetObj, gbpRate, dailyTotal }) => {
                     <div className="testText">{assetObj.name}</div>
                     <div className="testText">{amount}</div>
                     <div className="testText">{currentPrice}</div>
+                    <div className="testText">{currentTotal}</div>
                     <div className="testText">{refinedDailyPer} %</div>
                     <div className="testText">{volPerToTotal} %</div>
 

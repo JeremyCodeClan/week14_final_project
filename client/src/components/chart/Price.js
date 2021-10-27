@@ -1,77 +1,106 @@
 import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'components/common/general/Responsive';
+import { coinObjects } from 'helpers/coinlist/coinData';
 
 const PriceBlock = styled(Responsive)`
     margin-top: 2rem;
 `;
 
 const ContentBlock = styled.article`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightest-plum);
-
     display: flex;
-    height: 6rem;
+    height: 10rem;
     padding: 0.5rem;
 `;
 
-const ValueSection = styled.section`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lighter-plum);
-
+const LogoAndNameBock = styled.section`
     display: flex;
-    flex-direction: column;
-
-    width: 50%;
+    width: 35%;
     padding: 1rem;
-
-    .big-value {
-        font-size: var(--ft-xxl);
-    }
-    .small-group {
+    .logo-section {
         display: flex;
-        font-size: var(--ft-md);
-        .small-value {
-            margin-right: 1rem;
+        justify-content: center;
+        align-items: center;
+        margin: 0 2rem 0 1rem; 
+        .coin-img {
+            height: 100px;
         }
+    }
+    .name-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .name-code {
+            font-size: var(--ft-lg-heading);
+            color: var(--lightestest-navy);
+        }
+        .name-fullname {
+            font-size: var(--ft-xxl);
+            color: var(--lightestestest-navy);
+        }
+
+    }
+    
+`;
+
+const OCHLPriceBlock = styled.section`
+    width: 65%;
+    padding: 1rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    .open-div, .close-div {
+        margin-right: 2rem;
+    }
+    .open-div, .high-div {
+        margin-bottom: 1rem;
+    }
+    .type-text {
+        color: var(--lightestestest-navy);
+        margin-bottom: 0.25rem;
+    }
+    .price-text {
+        color: var(--lightestest-navy);
+        font-size: var(--ft-xl);
     }
 `;
 
-const CurrencyBlock = styled.section`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lighter-plum);
+const Price = ({ coinCode, openRef, closeRef, highRef, lowRef }) => {
 
-    width: 50%;
-    padding: 1rem;
-
-    .big-value {
-        font-size: var(--ft-xxl);
-    }
-    .small-group {
-        display: flex;
-        font-size: var(--ft-md);
-        .small-value {
-            margin-right: 1rem;
-        }
-    }
-`;
-
-const Price = ({ openRef, closeRef, highRef, lowRef }) => {
     return (
         <PriceBlock>
             <ContentBlock>
-                <div>Candle Chart</div>
-                <ValueSection>
-                    <div className="closeRef" ref={closeRef}>Loading...</div>
-                    <div className="openRef" ref={openRef}>Loading...</div>
-                </ValueSection>
-                <CurrencyBlock>
-                    <div className="highRef" ref={highRef}>Loading...</div>
-                    <div className="lowRef" ref={lowRef}>Loading...</div>
-                </CurrencyBlock>
+                <LogoAndNameBock>
+                    <div className="logo-section">
+                        <img className="coin-img" src={`/images/${coinCode}.svg`} />
+                    </div>
+                    <div className="name-section">
+                        <div className="name-code">{coinCode}</div>
+                        <div className="name-fullname">{coinObjects[`${coinCode}`].fullName}</div>
+                    </div>
+                </LogoAndNameBock>
+                <OCHLPriceBlock>
+                    <section className="open-close-block">
+                        <div className="open-div">
+                            <div className="type-text">Open</div>
+                            <div className="price-text" ref={openRef}>Loading...</div>
+                        </div>
+                        <div className="close-div">
+                            <div className="type-text">Close</div>                
+                            <div className="price-text" ref={closeRef}>Loading...</div>
+                        </div>
+                    </section>
+                    <section className="high-low-block">
+                        <div className="high-div">
+                            <div className="type-text">High</div>
+                            <div className="price-text" ref={highRef}>Loading...</div>
+                        </div>
+                        <div className="low-div">
+                            <div className="type-text">Low</div>                
+                            <div className="price-text" ref={lowRef}>Loading...</div>
+                        </div>
+                    </section>
+                </OCHLPriceBlock>
             </ContentBlock>
         </PriceBlock>
     )

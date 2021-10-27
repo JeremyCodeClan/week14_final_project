@@ -9,13 +9,14 @@ import RedirectPopContainer from 'containers/auth/RedirectPopContainer';
 import { GlobalStyle } from 'helpers/styles'
 
 const App = () => {
+
   return (
     <>
       <GlobalStyle />
        <Route component={HomePage} path='/' exact />
        <Route component={MarketPage} path='/market' exact />
        <Route component={ChartPage} path='/chart/@:coin' exact />
-       <Route component={AssetPage} path='/asset' exact />
+       <Route component={AssetPage}  path='/asset' exact />
        <Route component={RedirectPopContainer} path='/redirect' />
     </>
   );

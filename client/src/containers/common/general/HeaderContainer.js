@@ -9,7 +9,7 @@ import * as service from 'helpers/api/service';
 import firebaseAuth from 'helpers/firebase/firebaseAuth';
 import Header from 'components/common/general/Header'
 
-const HeaderContainer = () => {
+const HeaderContainer = ({ history }) => {
 
     const dispatch = useDispatch();
     const { userId, assets, profile } = useSelector(({ auth, userAssets, userProfile }) => ({
@@ -24,15 +24,12 @@ const HeaderContainer = () => {
             // getting access_token!!!!! 
             console.log(accessToken.node_.value_)
             if (userId !== null) { service.requestSignout(userId); onInitializeUserId();}
-            console.log('hey')
             if (assets !== null) onInitializeAssets();
-            console.log('hoy')
             if (profile !== null) oninitializeUserProfile();
-            console.log('wow')
         } catch (e) {
             console.error(e);
         }
-        
+        history.push('/')
     }
 
     const onSaveAssets = useCallback((payload) => dispatch(saveAssets(payload)), [dispatch])

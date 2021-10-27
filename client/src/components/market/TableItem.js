@@ -1,37 +1,58 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { refineNum } from 'helpers/calculation/calculator';
 
 const TableItemBlock = styled.article`
     height: 4rem;
 `;
 
 const TableItemLink = styled(Link)`
-    /* space indicate purpose */
-    border: 1px dashed red;
-
+    border-top: 1px solid var(--lightestestest-navy);
+    border-bottom: 1px solid grey;
     padding: 1rem 1rem;
     margin: 1rem auto;
     display: flex;
     justify-content: space-evenly;
 
     background: var(--brightest-white);
-
-    .testText { color: var(--navy); }
-    .coin-img { height: 40px; }
+    .testText { color: var(--light-navy); }
+    .image-name-block {
+        display: flex;
+        width: 40%;
+    }
+    .image-block {
+        width: 50%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-right: 3rem;
+    }
+    .coinName-block {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+    .dailyPrice-block, .dailyPer-block, .dailyVol-block {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .image-block {
+        height: 50px;
+    }
+    .coin-img { height: 50px; }
+    .coinName-block {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 const TableItem = ({ coin, gbpRate }) => {
 
     // prices
-    let dailyPrice;
-    if (coin.value.currentPrice > 10000) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(2);
-    if (coin.value.currentPrice < 10000 && coin.value.currentPrice > 1000) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(3);
-    if (coin.value.currentPrice < 1000 && coin.value.currentPrice > 100) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(4);
-    if (coin.value.currentPrice < 100 && coin.value.currentPrice > 10) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(5);
-    if (coin.value.currentPrice < 10 && coin.value.currentPrice > 1) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(6);
-    if (coin.value.currentPrice < 1 && coin.value.currentPrice > 0.1) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(6);
-    if (coin.value.currentPrice < 0.1) dailyPrice = (coin.value.currentPrice * gbpRate).toFixed(6);
+    let dailyPrice = refineNum(coin.value.currentPrice, gbpRate)
     const dailyVol = (coin.value.currentPrice * coin.value.dailyVolume / 1000000).toFixed(3);
 
     // percentages
@@ -43,12 +64,25 @@ const TableItem = ({ coin, gbpRate }) => {
             <TableItemLink to={`/chart/@${coin.value.name}`}>
                 {coin.value !== null ? 
                 <>
-                    <img className="coin-img" src={`/images/${coin.code}.svg`} />
-                    <div className="testText">{coin.fullname}</div>
-                    <div className="testText">{coin.code}</div>
-                    <div className="testText">{dailyPrice}</div>
-                    <div className="testText">{refinedDailyPer} %</div>
-                    <div className="testText">{dailyVol}</div>
+                    <div className="image-name-block">
+                        <div className="image-block">
+                            <img className="coin-img" src={`/images/${coin.code}.svg`} />
+                        </div>
+                        <div className="coinName-block">
+                            <div className="testText">{coin.fullname}</div>
+                            <div className="testText">{coin.code}</div>
+                        </div>
+                    </div>
+                    
+                    <div className="dailyPrice-block">
+                        <div className="testText">{dailyPrice}</div>
+                    </div>
+                    <div className="dailyPer-block">
+                        <div className="testText">{refinedDailyPer} %</div>
+                    </div>
+                    <div className="dailyVol-block">
+                        <div className="testText">{dailyVol}</div>
+                    </div>
                 </>
                 :
                 <></>

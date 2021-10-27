@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 import Responsive from 'components/common/general/Responsive';
 
 const HeaderBlock = styled.div`
@@ -18,28 +19,14 @@ const NavBlock = styled(Responsive)`
     justify-content: space-between;
 `;
 
-const LogoText = styled.div`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightest-teal);
-
-    font-size: var(--ft-heading);
-    color: var(--lightest-navy);
-    font-weight: bold;
-`;
-
 const NavItemBlock = styled.nav``;
 const NavItems = styled.ul`
-    /* space indicate purpose */
-    border: 1px dashed red;
-    background: var(--lightest-teal);
-
     padding: 0;
     display: flex;
-    color: var(--lightest-navy);
+    color: var(--lightestest-navy);
     .nav-item {
         margin-left: 2rem;
-        font-size: var(--ft-lg);
+        font-size: var(--ft-xl);
         cursor: pointer;
     }
 `;
@@ -49,7 +36,7 @@ const Header = ({ userId, signinFnc, signoutFnc }) => {
     return (
         <HeaderBlock>
             <NavBlock>
-                <LogoText><Link to='/'>MCC</Link></LogoText>
+                <Logo />
                 <NavItemBlock>
                 <NavItems>
                     <li className="nav-item"><Link to='/market'>Market</Link></li>
@@ -58,8 +45,8 @@ const Header = ({ userId, signinFnc, signoutFnc }) => {
                             <li className="nav-item" onClick={signinFnc}>Sign-in</li>
                         ):(
                         <>
-                            <li className="nav-item"><Link to='/asset'>My Asset</Link></li>
-                            <li className="nav-item" onClick={signoutFnc}>Sign-out</li>
+                            <li className="nav-item"><Link to='/asset'>Asset</Link></li>
+                            <li className="nav-item" onClick={signoutFnc}>Sign out</li>
                         </>
                         )
                     }

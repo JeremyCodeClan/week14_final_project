@@ -34,20 +34,31 @@ def index():
 @app.route('/history')
 def history():
     coin_type = request.args['type']
-    candleSticks = None
+    coin_time = request.args['time']
+    gbp_value = request.args['gbp']
+    float_gbp = float(gbp_value)
+    gbp_rate = float_gbp / 100
+
     try:
-        candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1MINUTE, "12 hours ago UTC")
+        if coin_time == '1m':
+            candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1MINUTE, "12 hours ago UTC")
+        if coin_time == '1h':
+            candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1HOUR, "1 month ago UTC")
+        if coin_time == '1d':
+            candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1DAY, "2 years ago UTC")
+        if coin_time == '1w':
+            candleSticks = chart_client.get_historical_klines(coin_type, Client.KLINE_INTERVAL_1WEEK, "5 years ago UTC")
     except Exception as e:
         print("an exception has occured - {}".format(e))
     processed_candleSticks = []
     if candleSticks is not None:
         for data in candleSticks:
             candleStick = {
-                "time": data[0] / 1000,
-                "open": data[1],
-                "high": data[2],
-                "low": data[3],
-                "close": data[4]
+                "time": float(data[0] / 1000),
+                "open": float(data[1]) * gbp_rate,
+                "high": float(data[2]) * gbp_rate,
+                "low": float(data[3]) * gbp_rate,
+                "close": float(data[4]) * gbp_rate,
             }
             processed_candleSticks.append(candleStick)
     return jsonify(processed_candleSticks)
@@ -79,12 +90,12 @@ def token():
     base = 'https://www.coinbase.com/oauth/token?'
     code = request.args['code']
     query_params = {
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'redirect_uri': redirect_uri,
-            'grant_type': 'authorization_code',
-            'code': code
-        }
+        'client_id': client_id,
+        'client_secret': client_secret,
+        'redirect_uri': redirect_uri,
+        'grant_type': 'authorization_code',
+        'code': code
+    }
     end_point = base + urlencode(query_params)
     signin = requests.post(end_point)
     signin_response = json.loads(signin.text)

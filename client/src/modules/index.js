@@ -7,6 +7,7 @@ import auth from './auth';
 import userAssets from "./userAssets";
 import userProfile from "./userProfile";
 import currencyGbp from "./currencyGbp";
+import currencyCustom from "./currencyCustom";
 
 const persistConfig = {
     key: "root",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     userAssets,
     userProfile,
     currencyGbp,
+    currencyCustom,
 })
 
 export default persistReducer(persistConfig, rootReducer);
