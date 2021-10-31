@@ -1,0 +1,48 @@
+export const coinLists = [
+{ code: "BTC", product_id: "BTC-USD", stateKey: "btc_usd", fullName: "Bitcoin" },
+{ code: "ETH", product_id: "ETH-USD", stateKey: "eth_usd", fullName: "Ethereum" },
+{ code: "ADA", product_id: "ADA-USD", stateKey: "ada_usd", fullName: "Cardano" },
+{ code: "SOL", product_id: "SOL-USD", stateKey: "sol_usd", fullName: "Solana" },
+{ code: "DOT", product_id: "DOT-USD", stateKey: "dot_usd", fullName: "Polkadot" },
+{ code: "DOGE", product_id: "DOGE-USD", stateKey: "doge_usd", fullName: "Dogecoin" },
+{ code: "UNI", product_id: "UNI-USD", stateKey: "uni_usd", fullName: "Uniswap" },
+{ code: "AVAX", product_id: "AVAX-USD", stateKey: "avax_usd", fullName: "Avalanche" },
+{ code: "LINK", product_id: "LINK-USD", stateKey: "link_usd", fullName: "Chainlink" },
+{ code: "LTC", product_id: "LTC-USD", stateKey: "ltc_usd", fullName: "Litecoin" },
+{ code: "BCH", product_id: "BCH-USD", stateKey: "bch_usd", fullName: "Bitcoin Cash"  },
+{ code: "ALGO", product_id: "ALGO-USD", stateKey: "algo_usd", fullName: "Algorand" },
+{ code: "SHIB", product_id: "SHIB-USD", stateKey: "shib_usd", fullName: "Shiba Inu"  },
+{ code: "MATIC", product_id: "MATIC-USD", stateKey: "matic_usd", fullName: "Polygon" },
+{ code: "XLM", product_id: "XLM-USD", stateKey: "xlm_usd", fullName: "Stellar Lumens" },
+{ code: "ATOM", product_id: "ATOM-USD", stateKey: "atom_usd", fullName: "Cosmos" },
+{ code: "ICP", product_id: "ICP-USD", stateKey: "icp_usd", fullName: "Internet Computer"  },
+{ code: "AXS", product_id: "AXS-USD", stateKey: "axs_usd", fullName: "Axie Infinity"  },
+{ code: "FIL", product_id: "FIL-USD", stateKey: "fil_usd", fullName: "Filecoin" },
+{ code: "ETC", product_id: "ETC-USD", stateKey: "etc_usd", fullName: "Ethereum Classic"  },
+]
+
+export const coinObjects = {
+   BTC: { code: "BTC", product_id: "BTC-USD", stateKey: "btc_usd", fullName: "Bitcoin" },
+   ETH: { code: "ETH", product_id: "ETH-USD", stateKey: "eth_usd", fullName: "Ethereum" },
+   ADA: { code: "ADA", product_id: "ADA-USD", stateKey: "ada_usd", fullName: "Cardano" },
+   SOL: { code: "SOL", product_id: "SOL-USD", stateKey: "sol_usd", fullName: "Solana" },
+   DOT: { code: "DOT", product_id: "DOT-USD", stateKey: "dot_usd", fullName: "Polkadot" },
+   DOGE: { code: "DOGE", product_id: "DOGE-USD", stateKey: "doge_usd", fullName: "Dogecoin" },
+   UNI: { code: "UNI", product_id: "UNI-USD", stateKey: "uni_usd", fullName: "Uniswap" },
+   AVAX: { code: "AVAX", product_id: "AVAX-USD", stateKey: "avax_usd", fullName: "Avalanche" },
+   LINK: { code: "LINK", product_id: "LINK-USD", stateKey: "link_usd", fullName: "Chainlink" },
+   LTC: { code: "LTC", product_id: "LTC-USD", stateKey: "ltc_usd", fullName: "Litecoin" },
+   BCH: { code: "BCH", product_id: "BCH-USD", stateKey: "bch_usd", fullName: "Bitcoin Cash"  },
+   ALGO: { code: "ALGO", product_id: "ALGO-USD", stateKey: "algo_usd", fullName: "Algorand" },
+   SHIB: { code: "SHIB", product_id: "SHIB-USD", stateKey: "shib_usd", fullName: "Shiba Inu"  },
+   MATIC: { code: "MATIC", product_id: "MATIC-USD", stateKey: "matic_usd", fullName: "Polygon" },
+   XLM: { code: "XLM", product_id: "XLM-USD", stateKey: "xlm_usd", fullName: "Stellar Lumens" },
+   ATOM: { code: "ATOM", product_id: "ATOM-USD", stateKey: "atom_usd", fullName: "Cosmos" },
+   ICP: { code: "ICP", product_id: "ICP-USD", stateKey: "icp_usd", fullName: "Internet Computer"  },
+   AXS: { code: "AXS", product_id: "AXS-USD", stateKey: "axs_usd", fullName: "Axie Infinity"  },
+   FIL: { code: "FIL", product_id: "FIL-USD", stateKey: "fil_usd", fullName: "Filecoin" },
+   ETC: { code: "ETC", product_id: "ETC-USD", stateKey: "etc_usd", fullName: "Ethereum Classic"  },
+}
+
+export const coinProductIdArr = coinLists.map((arr, i) => arr.product_id);
+export const coinStateKeyArr = coinLists.map((arr, i) => arr.stateKey);
