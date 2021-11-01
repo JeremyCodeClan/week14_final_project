@@ -12,7 +12,7 @@ export const saveCustomNum = createAction(SAVE_CUSTOM_NUM, value => value);
 
 const initialState = {
     name: null,
-    icon: null,
+    icon: '£',
     currency: 1
 };
 

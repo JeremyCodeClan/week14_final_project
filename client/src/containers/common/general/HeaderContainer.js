@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { initializeUid } from 'modules/auth';
 import { saveAssets, initializeAssets } from 'modules/userAssets';
 import { saveUserProfile, initializeUserProfile } from 'modules/userProfile';
+import { initializeCustom } from 'modules/currencyCustom';
 import { coinObjects } from 'helpers/coinlist/coinData';
 import * as service from 'helpers/api/service';
 import firebaseAuth from 'helpers/firebase/firebaseAuth';
@@ -12,10 +13,11 @@ import Header from 'components/common/general/Header'
 const HeaderContainer = ({ history }) => {
 
     const dispatch = useDispatch();
-    const { userId, assets, profile } = useSelector(({ auth, userAssets, userProfile }) => ({
+    const { userId, assets, profile, customCurreny } = useSelector(({ auth, userAssets, userProfile, currencyCustom }) => ({
         userId: auth.uid,
         assets: userAssets.assets,
-        profile: userProfile.profile
+        profile: userProfile.profile,
+        customCurreny: currencyCustom.name,
     }))
     const signinFnc = () => firebaseAuth.signin();
     const signoutFnc = async () => {
@@ -26,22 +28,25 @@ const HeaderContainer = ({ history }) => {
             if (userId !== null) { service.requestSignout(userId); onInitializeUserId();}
             if (assets !== null) onInitializeAssets();
             if (profile !== null) oninitializeUserProfile();
+            if (customCurreny !== null) onInitializeCustomCurreny();
         } catch (e) {
             console.error(e);
         }
         history.push('/')
     }
 
-    const onSaveAssets = useCallback((payload) => dispatch(saveAssets(payload)), [dispatch])
-    const onSaveUserProfile = useCallback((payload) => dispatch(saveUserProfile(payload)), [dispatch])
+    const onSaveAssets = useCallback((payload) => dispatch(saveAssets(payload)), [dispatch]);
+    const onSaveUserProfile = useCallback((payload) => dispatch(saveUserProfile(payload)), [dispatch]);
 
-    const onInitializeAssets = useCallback(() => dispatch(initializeAssets()), [dispatch])
-    const oninitializeUserProfile = useCallback(() => dispatch(initializeUserProfile()), [dispatch])
+    const onInitializeAssets = useCallback(() => dispatch(initializeAssets()), [dispatch]);
+    const oninitializeUserProfile = useCallback(() => dispatch(initializeUserProfile()), [dispatch]);
 
-    const onInitializeUserId = useCallback(() => dispatch(initializeUid()), [dispatch])
+    const onInitializeUserId = useCallback(() => dispatch(initializeUid()), [dispatch]);
+
+    const onInitializeCustomCurreny =  useCallback(() => dispatch(initializeCustom()), [dispatch]);
 
     useEffect(() => {
-        if (userId !== null &&  profile === null && assets === null) {
+        if (userId !== null &&  profile === null || assets === null) {
             service.getAssets(userId)
                 .then((res) => {
                     const convertArrayToObject = (array, key) => {

@@ -18,7 +18,7 @@ const TableMenuWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     background: var(--brightest-white);
-    .testText { color: var(--lightestest-navy); }
+    .testText { color: var(--darkest-orange); }
     .menu-image-block {
         display: flex;
         width: 40%;
@@ -67,7 +67,7 @@ const TableList = ({ coinArr, gbpRate }) => {
                             <div className="testText">Daily Pct (%)</div>
                         </div>
                         <div className="menu-vol-block">
-                            <div className="testText">Daily Vol (MM) </div>
+                            <div className="testText">Daily V (£ MM) </div>
                         </div>
                     </TableMenuWrapper>
                 </TableMenuBlock>

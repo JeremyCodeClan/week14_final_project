@@ -13,6 +13,13 @@ const ChartBlock = styled(Responsive)`
 const ChartWrapper = styled.section`
     width: 95%;
     margin: 0 auto;
+    #chart {
+        z-index: 2;
+    }
+
+    .loading {
+        height: 350px;
+    }
 `;
 
 const Chart = ({ gbpRate, chartInterval, coinQuery, openRef, closeRef, highRef, lowRef }) => {
@@ -21,7 +28,7 @@ const Chart = ({ gbpRate, chartInterval, coinQuery, openRef, closeRef, highRef, 
     const chartWrap = useRef();
 
     const [chartData, setChartData] = useState(null);
-
+    
     useEffect(() => {
         coinSerivce.getChartHistory(coinQuery, chartInterval)
             .then((res) => {
@@ -61,10 +68,6 @@ const Chart = ({ gbpRate, chartInterval, coinQuery, openRef, closeRef, highRef, 
                 borderUpColor: 'rgba(255, 255, 255, 1)',
                 wickDownColor: '#4555ff',
                 wickUpColor: '#ff7045',
-                // borderDownColor: 'rgba(0, 0, 0, 1)',
-                // borderUpColor: 'rgba(0, 0, 0, 1)',
-                // wickDownColor: 'rgba(255, 144, 0, 1)',
-                // wickUpColor: 'rgba(255, 144, 0, 1)',
             });
             
             candleSeries.setData(chartData);

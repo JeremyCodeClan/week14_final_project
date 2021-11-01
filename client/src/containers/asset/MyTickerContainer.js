@@ -4,7 +4,7 @@ import { changeMyTickerField, initializeAssets } from 'modules/userAssets';
 import MyTickerSocket from 'components/asset/MyTickerSocket';
 import { coinLists } from 'helpers/coinlist/coinData';
 
-const MyTickerContainer = () => {
+const MyTickerContainer = ({ gbpRate }) => {
     
     const dispatch = useDispatch();
     const onChangeMyTicker = useCallback((payload) => dispatch(changeMyTickerField(payload)), [dispatch]);
@@ -28,6 +28,7 @@ const MyTickerContainer = () => {
                 crpytoIdArr={coinProductIdArr}
                 cryptoLists={coinLists}
                 assets={assets}
+                gbpRate={gbpRate}
             />
             ):(
             <></>
