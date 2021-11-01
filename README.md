@@ -8,7 +8,7 @@ MyCryptoViewer allows you to view crypto currency price & chart and track your c
 [[ 🚧 Hosting under progress... 🚧 ]]
 
 
-<img src = "./static/market_chart.gif" width ="400" /> <img src = "./static/assets.gif" width ="400" />
+<img src = "./static/example_1.gif" width ="400" /> <img src = "./static/example_2.gif" width ="400" />
 
 </div>
 
