@@ -45,10 +45,10 @@ const Header = ({ userId, signinFnc, signoutFnc }) => {
                     <li className="nav-item"><Link to='/market'>Market</Link></li>
                     { userId === null ?
                         (
-                            <li className="nav-item" onClick={signinFnc}>Sign-in</li>
+                            <li className="nav-item" onClick={signinFnc}>Sign in</li>
                         ):(
                         <>
-                            <li className="nav-item"><Link to='/asset'>Asset</Link></li>
+                            <li className="nav-item"><Link to='/asset'>Assets</Link></li>
                             <li className="nav-item" onClick={signoutFnc}>Sign out</li>
                         </>
                         )
