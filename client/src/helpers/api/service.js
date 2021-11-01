@@ -10,7 +10,7 @@ export const redirectToken = (code) => {
     return client.get(`token?code=${code}`)
 }
 export const requestSignout = (uid) => {
-    return client.get(`signout?uid=${uid}`)
+    return client.post(`signout?uid=${uid}`)
 }
 
 // coinbase api
