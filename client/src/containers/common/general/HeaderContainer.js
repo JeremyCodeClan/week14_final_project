@@ -22,10 +22,12 @@ const HeaderContainer = ({ history }) => {
     const signinFnc = () => firebaseAuth.signin();
     const signoutFnc = async () => {
         try {
-            const accessToken = await firebaseAuth.getAccessToken(userId);
-            // getting access_token!!!!! 
-            console.log(accessToken.node_.value_)
-            if (userId !== null) { service.requestSignout(userId); onInitializeUserId();}
+            const firebaseAccess = await firebaseAuth.getAccessToken(userId);
+            const accessToken = firebaseAccess.node_.value_;
+
+            if (userId !== null) { service.requestSignout(userId, accessToken); onInitializeUserId();}
+
+            // if (userId !== null) { service.requestSignout(userId, accessToken); onInitializeUserId();}
             if (assets !== null) onInitializeAssets();
             if (profile !== null) oninitializeUserProfile();
             if (customCurreny !== null) onInitializeCustomCurreny();
@@ -46,7 +48,7 @@ const HeaderContainer = ({ history }) => {
     const onInitializeCustomCurreny =  useCallback(() => dispatch(initializeCustom()), [dispatch]);
 
     useEffect(() => {
-        if (userId !== null &&  profile === null || assets === null) {
+        if ((userId !== null &&  profile === null) || (userId !== null && assets === null)) {
             service.getAssets(userId)
                 .then((res) => {
                     const convertArrayToObject = (array, key) => {

@@ -6,8 +6,8 @@ from firebase_admin import credentials
 from coinbase.wallet.client import OAuthClient
 
 from Crypto import Random
-from flask import Flask, request, redirect, jsonify, json
-from flask_cors import CORS
+from flask import Flask, request, redirect, jsonify, json, Response
+from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 from binance.client import Client
 from urllib.parse import urlencode
@@ -17,7 +17,9 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 # move to other file
 cred = credentials.Certificate('mycryptocurrency.json')
@@ -100,17 +102,26 @@ def token():
     db.reference(f'coinbaseTokens/{uid}').update({ 'access_token': access_token, 'refresh_token': refresh_token })
     return authToken
 
-@app.route('/signout', methods=['POST'])
+@app.route('/signout', methods=["GET", "POST"])
+@cross_origin(supports_credentials=True)
 def signout():
     base = 'https://api.coinbase.com/oauth/revoke?'
     uid = request.args['uid']
+    requestAccess = request.data.decode('UTF-8')
+    requestAccessJSON = json.loads(requestAccess)
+    accessTokenCheck = requestAccessJSON['accessToken']
     accessToken = db.reference(f'coinbaseTokens/coinbase:{uid}/access_token').get()
-    query_params = { 'token': accessToken }
-    end_point = base + urlencode(query_params)
-    signout = requests.post(end_point)
-    signout_response = json.loads(signout.text)
-    db.reference('coinbaseTokens').set({})
-    return signout_response
+    if accessTokenCheck == accessToken:
+        query_params = { 'token': accessToken }
+        end_point = base + urlencode(query_params)
+        signout = requests.post(end_point)
+        signout_response = json.loads(signout.text)
+        db.reference('coinbaseTokens').set({})
+        return signout_response
+    else:
+        status_code = Response(status=401)
+        return status_code
+
 
 @app.route('/get_assets')
 def get_assets():
