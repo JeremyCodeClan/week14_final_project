@@ -9,8 +9,11 @@ export const getChartHistory = (coinQuery, chartInterval) => {
 export const redirectToken = (code) => {
     return client.get(`token?code=${code}`)
 }
-export const requestSignout = (uid) => {
-    return client.post(`signout?uid=${uid}`)
+export const requestSignout = (uid, accessToken) => {
+    return client.post(`signout?uid=${uid}`, {
+            accessToken: accessToken
+        }
+    )
 }
 
 // coinbase api

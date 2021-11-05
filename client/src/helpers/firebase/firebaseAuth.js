@@ -35,13 +35,6 @@ class Firebase {
 
 	getAccessToken(uid) {
 		return this.db.ref(`coinbaseTokens/coinbase:${uid}/access_token`).get()
-		// .once('value', function (snapshot) {
-		// 	snapshot.forEach(function(child) {
-		// 		if (child.key === 'access_token') {
-		// 			return child.node_.value_;
-		// 		}
-		// 	});
-		// });
 	}
 
 
