@@ -23,7 +23,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # move to other file
 cred = credentials.Certificate('mycryptocurrency.json')
-firebase_admin.initialize_app(cred, options={'databaseURL': 'https://mycryptocurrency-df595-default-rtdb.firebaseio.com'})
+firebase_admin.initialize_app(cred, options={'databaseURL': 'https://mycryptocurrency-9972e-default-rtdb.europe-west1.firebasedatabase.app/'})
 
 # binance chart client
 chart_client = Client(os.getenv('API_KEY'), os.getenv('API_SECRET'))
