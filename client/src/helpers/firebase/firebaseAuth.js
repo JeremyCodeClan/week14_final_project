@@ -25,7 +25,7 @@ class Firebase {
 	}
 
 	signin() {
-    	window.open('http://localhost:5000/auth_redirect', '_blank', `height=700, width=500, left=${window.innerWidth / 2 - 100}`);
+    	window.open('http://localhost:5000/api/auth_redirect', '_blank', `height=700, width=500, left=${window.innerWidth / 2 - 100}`);
 	}
 
 	signout() {
