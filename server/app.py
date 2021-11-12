@@ -6,7 +6,7 @@ from firebase_admin import credentials
 from coinbase.wallet.client import OAuthClient
 
 from Crypto import Random
-from flask import Flask, request, redirect, jsonify, json, Response
+from flask import Flask, send_from_directory, request, redirect, jsonify, json, Response
 from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 from binance.client import Client
@@ -16,17 +16,22 @@ import os
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', template_folder="../client/build", static_folder='../client/build')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 # move to other file
 cred = credentials.Certificate('mycryptocurrency.json')
-firebase_admin.initialize_app(cred, options={'databaseURL': 'https://mycryptocurrency-9972e-default-rtdb.europe-west1.firebasedatabase.app/'})
+firebase_admin.initialize_app(cred, options={'databaseURL': 'https://mycryptocurrency-9972e-default-rtdb.europe-west1.firebasedatabase.app'})
 
 # binance chart client
 chart_client = Client(os.getenv('API_KEY'), os.getenv('API_SECRET'))
+
+@app.route("/", defaults={'path':''})
+@app.route("/redirect",  defaults={'path':'redirect'})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
 @app.route('/history', methods=['GET'])
 def history():
@@ -61,7 +66,7 @@ def history():
 
 
 # coinbase variables
-redirect_uri = 'http://localhost:3000/redirect'
+redirect_uri = 'http://localhost:5000/redirect'
 client_id = os.getenv('CLIENT_ID')
 client_secret = os.getenv('CLIENT_SECRET')
     

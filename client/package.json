@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.23.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^8.2.3",
     "immer": "^8.0.1",
     "lightweight-charts": "^3.6.1",
@@ -27,7 +28,8 @@
   },
   "scripts": {
     "start": "NODE_PATH=src react-scripts start",
-    "build": "NODE_PATH=src react-scripts build",
+    "build": "env-cmd -f .env react-scripts  build",
+    "build:prod": "env-cmd -f .env.production react-scripts  build && move build ./build_prod",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

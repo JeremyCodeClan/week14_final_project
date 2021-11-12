@@ -13,7 +13,6 @@ const config = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
-
 class Firebase {
 	constructor() {
 		app.initializeApp(config)
@@ -36,32 +35,6 @@ class Firebase {
 	getAccessToken(uid) {
 		return this.db.ref(`coinbaseTokens/coinbase:${uid}/access_token`).get()
 	}
-
-
-	// addQuote(quote) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
-	// 		quote
-	// 	})
-	// }
-
-	// isInitialized() {
-	// 	return new Promise(resolve => {
-	// 		this.auth.onAuthStateChanged(resolve)
-	// 	})
-	// }
-
-	// getCurrentUsername() {
-	// 	return this.auth.currentUser && this.auth.currentUser.displayName
-	// }
-
-	// async getCurrentUserQuote() {
-	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
-	// 	return quote.get('quote')
-	// }
 }
 
 export default new Firebase()
