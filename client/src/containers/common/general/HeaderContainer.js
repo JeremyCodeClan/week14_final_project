@@ -24,9 +24,7 @@ const HeaderContainer = ({ history }) => {
         try {
             const firebaseAccess = await firebaseAuth.getAccessToken(userId);
             const accessToken = firebaseAccess.node_.value_;
-
             if (userId !== null) { service.requestSignout(userId, accessToken); onInitializeUserId();}
-
             // if (userId !== null) { service.requestSignout(userId, accessToken); onInitializeUserId();}
             if (assets !== null) onInitializeAssets();
             if (profile !== null) oninitializeUserProfile();
